@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: black;
+}
+
+.icon-btn {
+  width: 111px !important;
+  height: 46px;
+  border-radius: 0 !important;
+  border: 1px solid #00c2ff !important;
+}
+@media screen and (max-width: 768px) {
+  .card-image {
+    width: 255px;
+    height: 189px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .icon-btn {
+    width: 122px;
+  }
+  .card-image {
+    width: 100px;
+    height: 189px;
+  }
+}

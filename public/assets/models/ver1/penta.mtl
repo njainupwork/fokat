@@ -1,0 +1,78 @@
+# Blender MTL File: 'penta.blend'
+# Material Count: 7
+
+newmtl Material.117
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl emission1
+Ns 10.890003
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.010609 1.970186 4.199999
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Obrazy\\Kurs kekw\\Blender\\gradient_texture.png
+
+newmtl emission2
+Ns 10.890003
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 2.781421 0.599651 2.843123
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Obrazy\\Kurs kekw\\Blender\\gradient_texture.png
+
+newmtl emission3
+Ns 10.890003
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 1.334448 1.312646 0.352338
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Obrazy\\Kurs kekw\\Blender\\gradient_texture.png
+
+newmtl emission4
+Ns 10.890003
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 3.979361 4.113126 4.529999
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Obrazy\\Kurs kekw\\Blender\\gradient_texture.png
+
+newmtl floorpentagon
+Ns 27.134651
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Obrazy\\Kurs kekw\\Blender\\gradient_texture.png
+
+newmtl grad
+Ns 370.737571
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\Obrazy\\Kurs kekw\\Blender\\gradient_texture.png

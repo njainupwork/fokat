@@ -1,0 +1,22 @@
+{
+  "Price:": "Price:",
+  "Allocation:": "Allocation:",
+  "Lock-up Period:": "Lock-up Period:",
+  "Start Date:": "Start Date:",
+  "End Date:": "End Date:",
+  "Limit:": "Limit:",
+  "Unlock Wallet": "Unlock Wallet",
+  "Participate": "Participate",
+  "Not available yet": "Not available yet",
+  "Private Sale": "Private Sale",
+  "Presale": "Presale",
+  "Community Presale": "Community Presale",
+  "ELP Private Sale Introduction": "ELP Private Sale Introduction",
+  "User will be distributed with Temporary Nature Token (tNature) that can be redeemed for Nature Token ($Nature). $Nature will be distributed during Listing. User must placed tNature in our Nature Conversion Smart Contract to convert.": "User will be distributed with Temporary Nature Token (tNature) that can be redeemed for Nature Token ($Nature). $Nature will be distributed during Listing. User must placed tNature in our Nature Conversion Smart Contract to convert.",
+  "home": "Home",
+  "sponsorTree": "Sponsor Tree",
+  "transactionHistory": "Transaction History",
+  "referralLink": "Referral Link",
+  "pleaseRegisterYouhaveNoRegisteredYet": "Please register, you have no registered yet",
+  "register": "Register"
+}
