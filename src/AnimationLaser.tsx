@@ -20,7 +20,13 @@ import CameraGridController from "CameraGridController";
 
 const animationsObjects = [];
 
-function createMoveAnimation({ mesh, startPosition, endPosition, turn = 0 , callback = () => {}}) {
+function createMoveAnimation({
+  mesh,
+  startPosition,
+  endPosition,
+  turn = 0,
+  callback = () => {},
+}) {
   if (!mesh) {
     return;
   }
@@ -57,20 +63,18 @@ function createMoveAnimation({ mesh, startPosition, endPosition, turn = 0 , call
   //  mesh.position.set(20,20,20)
 
   gsap.to(mesh.position, {
-    duration: 1,
+    duration: 0.5,
     x: endPosition.x,
     y: endPosition.y,
     z: endPosition.z,
-    onUpdate: function () {
-      
-    },
-    onComplete: function(){
-    // turn character at every corner
+    onUpdate: function () {},
+    onComplete: function () {
+      // turn character at every corner
       if ((turn + 1) % 25 == 0) {
         mesh.rotateY(-0.9);
       }
       callback();
-    }
+    },
   });
 }
 function usePrevious(value) {
@@ -204,7 +208,8 @@ function AnimationLaser() {
       plotPrev = plotsChar[prevTurn];
     }
     // return character to middle user has logged out
-    if(gridPosition == -1) {
+    if (gridPosition == -1) {
+      setTurn(0);
       createMoveAnimation({
         mesh,
         // startPosition: {x: plot[0],y: plot[1],z: plot[0]},
@@ -213,18 +218,14 @@ function AnimationLaser() {
         startPosition: { x: plot[0], y: plot[1], z: plot[0] },
         endPosition: { x: 0, y: 0, z: 0 },
         turn: turn,
-        callback: () => {
-        setTurn(0);
-        }
+        callback: () => {},
       });
-    
     }
     if (gridPosition > 0) {
       if (turn == gridPosition) {
         return;
       }
-   
-      
+
       createMoveAnimation({
         mesh,
         // startPosition: {x: plot[0],y: plot[1],z: plot[0]},
@@ -234,11 +235,10 @@ function AnimationLaser() {
         endPosition: plot,
         turn: turn,
         callback: () => {
-        setTurn(turn + 1);
-        }
+          setTurn(turn + 1);
+        },
       });
     }
-
   }, [turn, gridPosition]);
   //   obj.load((anim));
   const scale = 1.06;

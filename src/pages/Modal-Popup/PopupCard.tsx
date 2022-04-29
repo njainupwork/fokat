@@ -14,12 +14,11 @@ const CardContainer = styled.div`
     width: 367px;
   }
 
-    position: absolute;
-    top: 50%;
-    z-index: 999999;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index:99999999999999999999999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
 `;
 const ButtonContainer = styled.div`
   display: flex;

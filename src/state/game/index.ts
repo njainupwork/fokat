@@ -59,6 +59,7 @@ export const Game = createSlice({
           },
         },
         gridPosition: parseInt(action.gridPosition),
+        characterSelected: parseInt(action.characterSelected),
       };
     });
     builder.addCase("mouseOver", (state, action: any) => {

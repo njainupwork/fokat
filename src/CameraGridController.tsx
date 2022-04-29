@@ -102,7 +102,7 @@ function CameraGridController({ turn, prevLookAt, position, prevTurn }) {
       fov={75}
       far={5000}
       near={1}
-      zoom={0.5}
+      zoom={0.4}
       //   far={100}
       // position={[plot.x, plot.y, -10]}
       // position={plot}

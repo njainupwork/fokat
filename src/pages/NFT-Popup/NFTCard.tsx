@@ -15,6 +15,12 @@ const Container = styled.div`
   @media (max-width: 425px) {
     height: 930px;
   }
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
 `;
 const CrossContainer = styled.div`
   display: flex;
@@ -153,6 +159,7 @@ const NFTCard: React.FC = () => {
     if (!account) {
       return;
     }
+    
     console.log("fetching....");
     setLoading(true);
     //@todo fix cors issue
@@ -180,6 +187,16 @@ const NFTCard: React.FC = () => {
           <img src={cross} alt="" style={{ width: "30px" }} />
         </CrossContainer>
         <Title>Fetching Tokens</Title>
+      </Container>
+    );
+  }
+  if (!tokens || !tokens.length) {
+    return (
+      <Container>
+        <CrossContainer>
+          <img src={cross} alt="" style={{ width: "30px" }} />
+        </CrossContainer>
+        <Title>You do not have any NFT Tokens</Title>
       </Container>
     );
   }

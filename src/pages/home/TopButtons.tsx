@@ -156,6 +156,7 @@ const TopButtons: React.FC = () => {
   const [rewards, setRewards] = useState("");
   const [received, setReceived] = useState("");
   const [txId, setTx] = useState(null);
+  const [rolling, setRolling] = useState(false);
 
   const [cam, setCam] = useState("grid");
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
@@ -163,9 +164,8 @@ const TopButtons: React.FC = () => {
 
   let time = "";
 
-  const { nextDiceRoll } = dice;
-
-  if (nextDiceRoll > 0) {
+  const { nextDiceRoll, diceAvailable } = dice;
+  if (nextDiceRoll > 0 && parseInt(diceAvailable) <= 1) {
     const t = moment(nextDiceRoll * 1000);
     if (t.diff(moment()) > 0) {
       time = t.local().fromNow();
@@ -190,6 +190,7 @@ const TopButtons: React.FC = () => {
           diceAvailable: 0,
           nextDiceRoll: 0,
           gridPosition: -1,
+          characterSelected: -1,
           roll1: 1,
           roll2: 1,
         });
@@ -201,6 +202,7 @@ const TopButtons: React.FC = () => {
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
+        characterSelected: tx[3] ? tx[3][0]: '',
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -212,8 +214,8 @@ const TopButtons: React.FC = () => {
       });
       if (showToast) {
         const move = parseInt(tx[4][0]) + parseInt(tx[4][1]);
-        // toastSuccess(`Successful, move ${move} number of grid`);
-        
+        toastSuccess(`Successful, move ${move} number of grid`);
+
         getRewards(tx[0]).then((eth) => {
           setReceived(eth);
         });
@@ -232,6 +234,9 @@ const TopButtons: React.FC = () => {
     playing ? audio.pause() : audio.play();
   }, [playing]);
   const prevAccount = usePrevious(account);
+  useEffect(() => {
+    getAndDispatchPosition();
+  }, [account])
   useEffect(() => {
     //if user switches account reset game
     if (!account || (prevAccount && prevAccount.toString() !== account)) {
@@ -295,8 +300,14 @@ const TopButtons: React.FC = () => {
     setCam(newCam);
   };
   const handleRoll = () => {
-    // toastSuccess("","Rolling dice. Please be patient");
+    toastSuccess("", "Rolling dice. Please be patient");
+    setRolling(true);
     onDiceRoll().then((tx) => {
+      setRolling(false);
+      if (!tx) {
+        toastError("Error", "Failed transaction.");
+        return;
+      }
       console.log("🚀 ~ file: TopButtons.tsx ~ line 186 ~ onDiceRoll ~ tx", tx);
       setTx(tx.transactionHash);
       getAndDispatchPosition(true);
@@ -352,9 +363,9 @@ const TopButtons: React.FC = () => {
             <DiceRollButton
               onClick={handleRoll}
               title={time}
-              disabled={time !== ""}
+              disabled={time !== "" || rolling}
             >
-              Roll
+              {rolling ? 'Rolling...': 'Roll'}
             </DiceRollButton>
           </>
         ) : (
@@ -362,9 +373,13 @@ const TopButtons: React.FC = () => {
         )}
       </RollButton>
       {received != "" && (
-        <PopupCard closePopup={closePopupCard} txId={txId} received={received} />
+        <PopupCard
+          closePopup={closePopupCard}
+          txId={txId}
+          received={received}
+        />
       )}
-      {/* {characterSelected == -1 && <NFTCard />} */}
+      {characterSelected == -1 && <NFTCard />}
 
       {/* <Grid /> */}
     </>
