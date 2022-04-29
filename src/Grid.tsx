@@ -186,7 +186,7 @@ interface SelectorProps {
 }
 
 function selector(state: State): SelectorProps {
-  console.log("state_state", state);
+  console.log("state_state___", state);
   return state.game;
 }
 const Grid: React.FC = () => {
