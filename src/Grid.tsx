@@ -24,13 +24,6 @@ function Loader() {
   return <Html center>{progress} % loaded</Html>;
 }
 
-function Div() {
-  return (
-    <div className="reward-box">
-      <h3>Reward Box</h3>
-    </div>
-  );
-}
 function Plane(props) {
   const dispatch = props.dispatch;
   const mouseOver =(event, k) => {
