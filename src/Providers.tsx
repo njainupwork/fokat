@@ -6,6 +6,7 @@ import { LanguageProvider } from "contexts/Localization"
 import { ThemeContextProvider } from "contexts/ThemeContext"
 import { Provider } from "react-redux"
 import store from "state"
+import { ToastsProvider } from "contexts/ToastsContext"
 type Props = {
   children: JSX.Element
 }
@@ -16,7 +17,9 @@ const Providers: React.FC<Props> = ({ children }: Props) => {
       <Provider store={store}>
         <LanguageProvider>
           <ThemeContextProvider>
-            <ModalProvider>{children}</ModalProvider>
+            <ToastsProvider>
+              <ModalProvider>{children}</ModalProvider>
+            </ToastsProvider>
           </ThemeContextProvider>
         </LanguageProvider>
       </Provider>
