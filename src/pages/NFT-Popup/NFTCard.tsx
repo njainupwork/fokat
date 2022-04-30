@@ -5,6 +5,8 @@ import cardimage from "../../assets/content.jpeg";
 import { useWeb3React } from "@web3-react/core";
 import { useCharacter } from "hooks/useCharacter";
 import { useDispatch } from "react-redux";
+import useToast from "hooks/useToast";
+
 const Container = styled.div`
   background: black;
   border: 1px solid white;
@@ -151,15 +153,17 @@ const Break = styled.div`
 
 const NFTCard: React.FC = () => {
   const { account } = useWeb3React();
-  const { getUserTokens } = useCharacter();
+  const { getUserTokens, enterGame } = useCharacter();
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(null);
+  const { toastSuccess, toastError } = useToast();
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!account) {
       return;
     }
-    
+
     console.log("fetching....");
     setLoading(true);
     //@todo fix cors issue
@@ -175,9 +179,18 @@ const NFTCard: React.FC = () => {
     }, 3500);
   }, [account]);
   const selectCharacter = (token: number) => {
-    dispatch({
-      type: "characterSelected",
-      token: token,
+  console.log("🚀 ~ file: NFTCard.tsx ~ line 182 ~ selectCharacter ~ token", token)
+    enterGame(token).then((info) => {
+      console.log("🚀 ~ file: NFTCard.tsx ~ line 180 ~ enterGame ~ info", info)
+      if(!info){
+        toastError("", "An error occurred!");
+        return;
+      }
+      toastSuccess("", "Success.")
+      dispatch({
+        type: "characterSelected",
+        token: token,
+      });
     });
   };
   if (loading == true) {
@@ -186,7 +199,7 @@ const NFTCard: React.FC = () => {
         <CrossContainer>
           <img src={cross} alt="" style={{ width: "30px" }} />
         </CrossContainer>
-        <Title>Fetching Tokens</Title>
+        <Title>Fetching NFTs</Title>
       </Container>
     );
   }
@@ -223,11 +236,11 @@ const NFTCard: React.FC = () => {
                         </Frame>
                       </Content>
                     </ContentWrapper>
-                    <Tag>Token {token}</Tag>
+                    {/* <Tag>Token {token}</Tag> */}
 
                     <Box>
-                      <Text1>NFT &nbsp; Details</Text1>
-                      <Text2>level</Text2>
+                      <Text1>#{token}</Text1>
+                      {/* <Text2>level</Text2> */}
                     </Box>
                   </NFT>
                 </>

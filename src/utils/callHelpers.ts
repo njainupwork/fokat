@@ -52,10 +52,10 @@ export const getUserOwnedTokens = async (nft, account) => {
   return userTokens;
 };
 
-export const enterGame = async (nft, nftId) => {
-  const enterGame = await nft.methods
-    .enterGame(nftId)
-    .send()
+export const enterGame = async (board, nftId, account) => {
+  const enterGame = await board.methods
+    .EnterGame([nftId])
+    .send({from: account})
     .on("transactionHash", (tx) => {
       console.log("🚀 ~ file: callHelpers.ts ~ line 60 ~ .on ~ tx", tx)
       return tx.transactionHash;
