@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import mgmicon from "../../assets/MGM.png";
 import cross from "../../assets/cross.png";
+import { useTranslation } from "contexts/Localization";
 
 const CardContainer = styled.div`
   background: black;
@@ -101,7 +102,7 @@ interface Props {
 }
 
 const PopupCard: React.FC<Props> = ({ closePopup, txId, received }) => {
-  const number = 10;
+  const {t} = useTranslation();
   return (
     <>
       <CardContainer>
@@ -110,11 +111,11 @@ const PopupCard: React.FC<Props> = ({ closePopup, txId, received }) => {
           <img src={cross} alt="cross" style={{ width: "30px" }} />
         </CrossContainer>
         <Wrapper>
-          <Text>Rewards</Text>
+          <Text>{t("rewards")}</Text>
           <img src={mgmicon} alt="mgmicon" style={{ width: "215px" }} />
           <TextBox>
-            <TextLine>You have recieved {received}&nbsp;</TextLine>
-            <TextLine>MGM tokens </TextLine>
+            <TextLine>{t("received_tokens")}{received}&nbsp;</TextLine>
+            <TextLine>MGM {t("tokens")} </TextLine>
           </TextBox>
         </Wrapper>
         <ButtonContainer>
@@ -123,9 +124,9 @@ const PopupCard: React.FC<Props> = ({ closePopup, txId, received }) => {
               window.open(`https://testnet.bscscan.com/tx/${txId}`, "_blank")
             }
           >
-            View Tx At BSC Scan
+            {t("view_transaction")}
           </ViewButton>
-          <CloseButton onClick={closePopup}>Close</CloseButton>
+          <CloseButton onClick={closePopup}>{t("close")}</CloseButton>
         </ButtonContainer>
       </CardContainer>
     </>

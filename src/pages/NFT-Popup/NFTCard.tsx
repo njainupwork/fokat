@@ -6,7 +6,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useCharacter } from "hooks/useCharacter";
 import { useDispatch } from "react-redux";
 import useToast from "hooks/useToast";
-
+import { useTranslation } from "contexts/Localization";
 const Container = styled.div`
   background: inherit;
   border: none;
@@ -91,6 +91,7 @@ const Text1 = styled.div`
   @media (max-width: 425px) {
     font-size: 16px;
   }
+  text-align:center;
 `;
 const Text2 = styled.div`
   font-family: Open Sans;
@@ -107,7 +108,7 @@ const Box = styled.div`
 }
 `;
 const ContentWrapper = styled.div`
-  background: white;
+  background: black;
   height: 188px;
   display: flex;
   align-items: center;
@@ -165,14 +166,15 @@ const NFTCard: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(null);
   const { toastSuccess, toastError } = useToast();
-
+  const {t, currentLanguage} = useTranslation();
+  const {locale} = currentLanguage;
+  console.log("🚀 ~ file: NFTCard.tsx ~ line 171 ~ locale", locale)
+  
   const dispatch = useDispatch();
   useEffect(() => {
     if (!account) {
       return;
     }
-
-    console.log("fetching....");
     setLoading(true);
     //@todo fix cors issue
     setTimeout(() => {
@@ -199,10 +201,10 @@ const NFTCard: React.FC = () => {
     enterGame(token).then((info) => {
       console.log("🚀 ~ file: NFTCard.tsx ~ line 180 ~ enterGame ~ info", info);
       if (!info) {
-        toastError("", "An error occurred!");
+        toastError("", t("error_occurred"));
         return;
       }
-      toastSuccess("", "Success.");
+      toastSuccess("", t("Success"));
       dispatch({
         type: "characterSelected",
         token: token,
@@ -212,21 +214,21 @@ const NFTCard: React.FC = () => {
   if (loading == true) {
     return (
       <Container>
-        <Title>Fetching NFTs</Title>
+        <Title>{t("fetching_nfts")}</Title>
       </Container>
     );
   }
   if (!tokens || !tokens.length) {
     return (
       <Container>
-        <Title>You do not have any NFT Tokens</Title>
+        <Title>{t("no_nft_tokens")}</Title>
       </Container>
     );
   }
   return (
     <>
       <Container>
-        <Title>Select Characters</Title>
+        <Title>{t("select_characters")}</Title>
         <CardContainer>
           {!loading &&
             tokens &&

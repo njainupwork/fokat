@@ -20,6 +20,7 @@ import myinventry from "../../assets/myinventry.png";
 import myequipment from "../../assets/equipment.png";
 import NFTCard from "pages/NFT-Popup/NFTCard";
 import useToast from "hooks/useToast";
+import { useTranslation } from "contexts/Localization";
 
 const MyEquipmentButton = styled.button`
   width: 211px;
@@ -161,7 +162,7 @@ const TopButtons: React.FC = () => {
   const [cam, setCam] = useState("grid");
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
-
+  const {t} = useTranslation();
   let time = "";
 
   const { nextDiceRoll, diceAvailable } = dice;
@@ -300,15 +301,15 @@ const TopButtons: React.FC = () => {
     setCam(newCam);
   };
   const handleRoll = () => {
-    toastSuccess("", "Rolling dice. Please be patient");
+    toastSuccess("", t("Rolling dice. Please be patient"));
     setRolling(true);
     onDiceRoll().then((tx) => {
       setRolling(false);
       if (!tx) {
-        toastError("Error", "Failed transaction.");
+        toastError("Error", t("Transaction Failed."));
         return;
       }
-      console.log("🚀 ~ file: TopButtons.tsx ~ line 186 ~ onDiceRoll ~ tx", tx);
+      
       setTx(tx.transactionHash);
       getAndDispatchPosition(true);
     });
@@ -320,8 +321,8 @@ const TopButtons: React.FC = () => {
     <>
       {hover != -1 ? (
         <HoverDiv>
-          <h3>Grid Info</h3>
-          <p>{rewards} MGM Tokens</p>
+          <h3>{t("grid_info")}</h3>
+          <p>{t(rewards)} MGM {t("tokens")}</p>
         </HoverDiv>
       ) : (
         ""
@@ -340,7 +341,7 @@ const TopButtons: React.FC = () => {
             <IconButton className="icon-btn">
               <img
                 src={ValumeUp}
-                alt="ValumeUp"
+                alt={t("Valume Up")}
                 style={{ width: "30px", height: "auto" }}
               />
             </IconButton>
@@ -355,7 +356,7 @@ const TopButtons: React.FC = () => {
       </ButtonBox>
       <Grid />
       <RollButton>
-        <DiceRollButton onClick={changeCam}>Change Cam</DiceRollButton>
+        <DiceRollButton onClick={changeCam}>{t("change_cam")}</DiceRollButton>
         {account ? (
           <>
             <DiceRollButton
@@ -363,7 +364,7 @@ const TopButtons: React.FC = () => {
               title={time}
               disabled={time !== "" || rolling}
             >
-              {rolling ? "Rolling..." : "Roll"}
+              {rolling ? t("rolling") : t("roll")}
             </DiceRollButton>
           </>
         ) : (

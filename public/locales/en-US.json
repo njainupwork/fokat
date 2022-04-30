@@ -32,5 +32,23 @@
   "Your wallet": "Your wallet",
   "We are seeking to raise $9 million via this round of Pre-Sales to enable higher quality development and marketing of Monopolon to the community.": "We are seeking to raise $9 million via this round of Pre-Sales to enable higher quality development and marketing of Monopolon to the community.",
   "The Monopolon envision ourselves to bring back the simple dice roll game that we had grown up with, combining the Play-To-Earn model and integrating the system with exclusive NFTs usable in-game. Creating a long-term sustainable game ecosystem Turning Virtual Into Reality and a chance to grow from Rags-to-Riches!": "The Monopolon envision ourselves to bring back the simple dice roll game that we had grown up with, combining the Play-To-Earn model and integrating the system with exclusive NFTs usable in-game. Creating a long-term sustainable game ecosystem Turning Virtual Into Reality and a chance to grow from Rags-to-Riches!",
-  "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50."
+  "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.",
+  
+  "Success": "Success",
+  "error_occurred": "An error occurred!",
+  "fetching_nfts": "Fetching NFTs",
+  "select_characters": "Select Characters",
+  "no_nft_tokens": "You do not have any NFT Tokens",
+  "change_cam": "Change Cam",
+  "rolling": "Rolling...",
+  "roll": "Roll",
+  "grid_info": "Grid Info",
+  "rewards": "Rewards",
+  "received_tokens": "You have recieved ",
+  "view_transaction": "View Tx At BSC Scan",
+  "close": "Close",
+  "tokens": "Tokens",
+  "100": "100",
+  "200": "200",
+  "300": "300"
 }

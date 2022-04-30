@@ -86,5 +86,23 @@
   "Register Failed": "注册失败",
   "We are seeking to raise $9 million via this round of Pre-Sales to enable higher quality development and marketing of Monopolon to the community.": "我们正在寻求通过这一轮预售筹集 900 万美元，以实现 Monopolon 更高质量的开发和社区营销。",
   "The Monopolon envision ourselves to bring back the simple dice roll game that we had grown up with, combining the Play-To-Earn model and integrating the system with exclusive NFTs usable in-game. Creating a long-term sustainable game ecosystem Turning Virtual Into Reality and a chance to grow from Rags-to-Riches!": "Monopolon 设想自己带回我们从小就玩的简单的掷骰子游戏，结合 Play-To-Earn 模型并将系统与游戏中可用的独家 NFT 集成。创建一个长期可持续的游戏生态系统将虚拟变为现实，并有机会从白手起家成长为致富！",
-  "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLON 是 Monopolon 的主要货币，允许玩家购买 NFT 角色以参与游戏。在正式推出之前，MONOPOLON 将占 MLON 总供应量的 1% 进行预售。 MLON 将在发布时以 1.00 美元的价格上市。总共 20,000,000 个代币将分为 0.40 美元的白名单预售和 0.50 美元的私人销售。"
+  "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLON 是 Monopolon 的主要货币，允许玩家购买 NFT 角色以参与游戏。在正式推出之前，MONOPOLON 将占 MLON 总供应量的 1% 进行预售。 MLON 将在发布时以 1.00 美元的价格上市。总共 20,000,000 个代币将分为 0.40 美元的白名单预售和 0.50 美元的私人销售。",
+
+  "Success": "成功",
+  "error_occurred": "发生错误",
+  "fetching_nfts": "抓取 NFTs",
+  "select_characters": "选择字符",
+  "no_nft_tokens": "您没有任何 NFT 代币",
+  "change_cam": "切换镜头",
+  "rolling": "滚动...",
+  "roll": "卷",
+  "grid_info": "网格信息",
+  "rewards": "奖励",
+  "received_tokens": "您已收到 ",
+  "view_transaction": "在 BSC 扫描处查看交易",
+  "close": "关闭",
+  "tokens": "代币",
+  "100": "一百",
+  "200": "二百",
+  "300": "三百"
 }
