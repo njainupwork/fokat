@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import cross from "../../assets/cross.png";
-import cardimage from "../../assets/blue-wings.png";
+import cardimage from "../../assets/content.jpeg";
 import { useWeb3React } from "@web3-react/core";
 import { useCharacter } from "hooks/useCharacter";
 import { useDispatch } from "react-redux";
 import useToast from "hooks/useToast";
 
 const Container = styled.div`
-  background: inherit;
-  border: none;
-  width: 100%;
-  height: 100%;
+  background: black;
+  border: 1px solid white;
+  width: 1019px;
+  height: 653px;
   border-radius: 10px;
-  margin-top: 30px;
+  margin: auto;
+  @media (max-width: 425px) {
+    height: 930px;
+  }
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
 `;
 const CrossContainer = styled.div`
   display: flex;
@@ -22,7 +31,7 @@ const CrossContainer = styled.div`
   border-radius: 10px;
 `;
 const Title = styled.div`
-  color: black;
+  color: white;
   font-family: Open Sans;
   font-weight: 700;
   font-size: 35px;
@@ -39,24 +48,19 @@ const Title = styled.div`
 `;
 
 const CardContainer = styled.div`
-  display: block;
+  display: flex;
   justify-content: center;
   margin-top: 6rem;
-
-  display: block;
-  flex-direction: column;
-  overflow: scroll;
-  display: grid;
-`;
-
-const CardRow = styled.div`
-  display: block;
-  justify-content: center;
-  margin-top: 6rem;
-
-  display: block;
-  flex-direction: column;
-  overflow: scroll;
+  @media (max-width: 768px) {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  @media (max-width: 425px) {
+    width: 65%;
+    display: flex;
+    justify-content: flex-start;
+  }
 `;
 const NFT = styled.div`
   border: 11px solid #1b202b;
@@ -74,22 +78,20 @@ const NFT = styled.div`
     margin: 0.3rem;
   }
   cursor: pointer;
-  // float: left;
 `;
 const Content = styled.div`
   width: 380px;
-  height: 100%;
-  color: black;
+  height: 49px;
+  color: white;
 `;
 const Frame = styled.div`
   width: 300px;
-  height: 100%;
+  height: 245px;
   margin: auto;
-  text-align:center;
-  // margin-top: 1.5rem;
+  margin-top: 1.5rem;
 `;
 const Text1 = styled.div`
-  color: black;
+  color: white;
   font-family: Open Sans;
   font-weight: 700;
   font-size: 18px;
@@ -106,7 +108,7 @@ const Text2 = styled.div`
   line-height: 21px;
 `;
 const Box = styled.div`
-  color:black;
+  color:white;
   margin-top: 30px;
   @media (max-width: 425px){
     margin-top: 35px;
@@ -116,16 +118,6 @@ const Box = styled.div`
 const ContentWrapper = styled.div`
   background: black;
   height: 188px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-`;
-const Row = styled.div`
-  width: auto;
-    align-items: center;
-    display: flex;
-    margin: auto;
-}
 `;
 const Tag = styled.div`
   border: 3px solid #f6cb31;
@@ -159,10 +151,6 @@ const Break = styled.div`
   height: 0;
 `;
 
-const CharacterImg = styled.img`
-  max-height:100%;
-`;
-
 const NFTCard: React.FC = () => {
   const { account } = useWeb3React();
   const { getUserTokens, enterGame } = useCharacter();
@@ -182,31 +170,23 @@ const NFTCard: React.FC = () => {
     setTimeout(() => {
       getUserTokens().then((tokens) => {
         setLoading(false);
-        const chunkSize = 3;
-        const chunks = [];
-        for (let i = 0; i < tokens.length; i += chunkSize) {
-          chunks.push(tokens.slice(i, i + chunkSize));
-        }
-        setTokens(chunks);
+        setTokens(tokens);
         console.log(
           "🚀 ~ file: NFTCard.tsx ~ line 148 ~ useEffect ~ tokens",
-          chunks
+          tokens
         );
       });
     }, 3500);
   }, [account]);
   const selectCharacter = (token: number) => {
-    console.log(
-      "🚀 ~ file: NFTCard.tsx ~ line 182 ~ selectCharacter ~ token",
-      token
-    );
+  console.log("🚀 ~ file: NFTCard.tsx ~ line 182 ~ selectCharacter ~ token", token)
     enterGame(token).then((info) => {
-      console.log("🚀 ~ file: NFTCard.tsx ~ line 180 ~ enterGame ~ info", info);
-      if (!info) {
+      console.log("🚀 ~ file: NFTCard.tsx ~ line 180 ~ enterGame ~ info", info)
+      if(!info){
         toastError("", "An error occurred!");
         return;
       }
-      toastSuccess("", "Success.");
+      toastSuccess("", "Success.")
       dispatch({
         type: "characterSelected",
         token: token,
@@ -216,6 +196,9 @@ const NFTCard: React.FC = () => {
   if (loading == true) {
     return (
       <Container>
+        <CrossContainer>
+          <img src={cross} alt="" style={{ width: "30px" }} />
+        </CrossContainer>
         <Title>Fetching NFTs</Title>
       </Container>
     );
@@ -223,6 +206,9 @@ const NFTCard: React.FC = () => {
   if (!tokens || !tokens.length) {
     return (
       <Container>
+        <CrossContainer>
+          <img src={cross} alt="" style={{ width: "30px" }} />
+        </CrossContainer>
         <Title>You do not have any NFT Tokens</Title>
       </Container>
     );
@@ -230,36 +216,34 @@ const NFTCard: React.FC = () => {
   return (
     <>
       <Container>
+        <CrossContainer>
+          <img src={cross} alt="" style={{ width: "30px" }} />
+        </CrossContainer>
+
         <Title>Select Characters</Title>
         <CardContainer>
           {!loading &&
             tokens &&
-            tokens.map((chunk) => {
+            tokens.map((token, index) => {
               return (
-                <Row>
-                  {chunk.map((token) => {
-                    return (
-                      <>
-                        <NFT onClick={() => selectCharacter(token)}>
-                          <ContentWrapper>
-                            <Content>
-                              <Frame>
-                              <CharacterImg src={cardimage}/>
-                                
-                              </Frame>
-                            </Content>
-                          </ContentWrapper>
-                          {/* <Tag>Token {token}</Tag> */}
+                <>
+                  {index % 2 == 0 && <Break />}
+                  <NFT onClick={() => selectCharacter(token)}>
+                    <ContentWrapper>
+                      <Content>
+                        <Frame>
+                          <img src={cardimage} alt="" className="card-image" />
+                        </Frame>
+                      </Content>
+                    </ContentWrapper>
+                    {/* <Tag>Token {token}</Tag> */}
 
-                          <Box>
-                            <Text1>NFT {token}</Text1>
-                            {/* <Text2>level</Text2> */}
-                          </Box>
-                        </NFT>
-                      </>
-                    );
-                  })}
-                </Row>
+                    <Box>
+                      <Text1>NFT {token}</Text1>
+                      {/* <Text2>level</Text2> */}
+                    </Box>
+                  </NFT>
+                </>
               );
             })}
         </CardContainer>
