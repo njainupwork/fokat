@@ -114,7 +114,7 @@ const HoverDiv = styled.div`
   border-radius: 5px;
 `;
 const SoundButton = styled.button`
-  width: 111px;
+  width: 211px;
   height: 46px;
   background: #0d0c0c;
   color: #00c2ff;
@@ -202,7 +202,7 @@ const TopButtons: React.FC = () => {
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3] ? tx[3][0]: '',
+        characterSelected: tx[3] ? tx[3][0] : "",
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -236,7 +236,7 @@ const TopButtons: React.FC = () => {
   const prevAccount = usePrevious(account);
   useEffect(() => {
     getAndDispatchPosition();
-  }, [account])
+  }, [account]);
   useEffect(() => {
     //if user switches account reset game
     if (!account || (prevAccount && prevAccount.toString() !== account)) {
@@ -346,14 +346,12 @@ const TopButtons: React.FC = () => {
             </IconButton>
           )}
         </Button>
-        <MyEquipmentButton>
-          {/* My Equipment */}
+        {/* <MyEquipmentButton>
           <img src={myequipment} alt="myequipment" style={{ width: "32px" }} />
         </MyEquipmentButton>
         <MyInventryButton>
-          {/* My Inventory */}
           <img src={myinventry} alt="myinventry" style={{ width: "32px" }} />
-        </MyInventryButton>
+        </MyInventryButton> */}
       </ButtonBox>
       <Grid />
       <RollButton>
@@ -365,7 +363,7 @@ const TopButtons: React.FC = () => {
               title={time}
               disabled={time !== "" || rolling}
             >
-              {rolling ? 'Rolling...': 'Roll'}
+              {rolling ? "Rolling..." : "Roll"}
             </DiceRollButton>
           </>
         ) : (
