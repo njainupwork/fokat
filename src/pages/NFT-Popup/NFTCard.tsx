@@ -18,11 +18,11 @@ const Container = styled.div`
 const CrossContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  background: black;
+  background: white;
   border-radius: 10px;
 `;
 const Title = styled.div`
-  color: black;
+  color: white;
   font-family: Open Sans;
   font-weight: 700;
   font-size: 35px;
@@ -72,7 +72,7 @@ const NFT = styled.div`
 const Content = styled.div`
   width: 380px;
   height: 100%;
-  color: black;
+  color: white;
 `;
 const Frame = styled.div`
   width: 300px;
@@ -82,7 +82,7 @@ const Frame = styled.div`
   // margin-top: 1.5rem;
 `;
 const Text1 = styled.div`
-  color: black;
+  color: white;
   font-family: Open Sans;
   font-weight: 700;
   font-size: 18px;
@@ -99,7 +99,7 @@ const Text2 = styled.div`
   line-height: 21px;
 `;
 const Box = styled.div`
-  color:black;
+  color:white;
   margin-top: 30px;
   @media (max-width: 425px){
     margin-top: 35px;
@@ -107,7 +107,7 @@ const Box = styled.div`
 }
 `;
 const ContentWrapper = styled.div`
-  background: black;
+  background: white;
   height: 188px;
   display: flex;
   align-items: center;
