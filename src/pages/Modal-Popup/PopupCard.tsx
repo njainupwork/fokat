@@ -114,7 +114,7 @@ const PopupCard: React.FC<Props> = ({ closePopup, txId, received }) => {
           <Text>{t("rewards")}</Text>
           <img src={mgmicon} alt="mgmicon" style={{ width: "215px" }} />
           <TextBox>
-            <TextLine>{t("received_tokens")}{received}&nbsp;</TextLine>
+            <TextLine>{t("Received Tokens")} {received}&nbsp;</TextLine>
             <TextLine>MGM {t("tokens")} </TextLine>
           </TextBox>
         </Wrapper>
@@ -124,7 +124,7 @@ const PopupCard: React.FC<Props> = ({ closePopup, txId, received }) => {
               window.open(`https://testnet.bscscan.com/tx/${txId}`, "_blank")
             }
           >
-            {t("view_transaction")}
+            {t("View Transaction")}
           </ViewButton>
           <CloseButton onClick={closePopup}>{t("close")}</CloseButton>
         </ButtonContainer>

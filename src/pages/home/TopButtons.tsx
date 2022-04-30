@@ -264,13 +264,7 @@ const TopButtons: React.FC = () => {
       if (!rewards) {
         return;
       }
-
-      const etherValue = Web3.utils.fromWei(
-        rewards.toString(),
-        "ether"
-      );
-
-      return etherValue;
+      return rewards.toString();
     });
   };
   useEffect(() => {
@@ -356,7 +350,7 @@ const TopButtons: React.FC = () => {
       </ButtonBox>
       <Grid />
       <RollButton>
-        <DiceRollButton onClick={changeCam}>{t("change_cam")}</DiceRollButton>
+        <DiceRollButton onClick={changeCam}>{t("Change Camera")}</DiceRollButton>
         {account ? (
           <>
             <DiceRollButton

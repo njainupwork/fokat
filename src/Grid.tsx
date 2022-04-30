@@ -41,7 +41,7 @@ const Scene = (props) => {
     <group ref={ref}>
       {/* <Cube/> */}
       {/* <gridHelper args={[50, 50]} /> */}
-      <axesHelper />
+      {/* <axesHelper /> */}
       {/* <Person/> */}
 
       {/* <Sky /> */}
@@ -88,7 +88,7 @@ const Grid: React.FC = () => {
             <Scene dispatch={dispatch} />
           </Suspense>
         </AppContext.Provider>
-        <Stats />
+        {/* <Stats /> */}
         {/* <OrbitControls /> */}
         <ambientLight />
         <pointLight position={[0, 3, 0]} />

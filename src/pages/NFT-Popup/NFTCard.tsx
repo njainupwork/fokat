@@ -219,7 +219,7 @@ const NFTCard: React.FC = () => {
       <Container>
         <Title>
           {t("You do not have any NFT Tokens. Please Purchase at")}{" "}
-          https://marketplace.monopolon.io/
+          <a target={"_blank"} href="https://marketplace.monopolon.io/">https://marketplace.monopolon.io/</a>
         </Title>
       </Container>
     );
