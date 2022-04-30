@@ -313,8 +313,8 @@ const TopButtons: React.FC = () => {
       getAndDispatchPosition(true);
     });
   };
-  if (characterSelected == -1) {
-    // return <NFTCard />;
+  if (characterSelected == -1 || !characterSelected) {
+    return <NFTCard />;
   }
   return (
     <>
