@@ -26,22 +26,17 @@ const Title = styled.div`
   font-family: Open Sans;
   font-weight: 700;
   font-size: 35px;
-  display: flex;
-  justify-content: center;
-  @media (max-width: 768px) {
-    margin-right: 200px;
-  }
+  width: 100%;
+  text-align: center;
+
   @media (max-width: 425px) {
-    margin-left: 71px;
-    display: flex;
-    justify-content: flex-start;
+    display: block;
   }
 `;
 
 const CardContainer = styled.div`
   display: block;
   justify-content: center;
-  margin-top: 6rem;
 
   display: block;
   flex-direction: column;
@@ -56,7 +51,6 @@ const CardRow = styled.div`
 
   display: block;
   flex-direction: column;
-  overflow: scroll;
 `;
 const NFT = styled.div`
   border: 11px solid #1b202b;
@@ -70,7 +64,6 @@ const NFT = styled.div`
     margin: 0.4rem;
   }
   @media (max-width: 425px) {
-    width: 30%;
     margin: 0.3rem;
   }
   cursor: pointer;
@@ -85,7 +78,7 @@ const Frame = styled.div`
   width: 300px;
   height: 100%;
   margin: auto;
-  text-align:center;
+  text-align: center;
   // margin-top: 1.5rem;
 `;
 const Text1 = styled.div`
@@ -125,6 +118,9 @@ const Row = styled.div`
     align-items: center;
     display: flex;
     margin: auto;
+    @media (max-width: 768px) {
+    display: block;
+    }
 }
 `;
 const Tag = styled.div`
@@ -160,7 +156,7 @@ const Break = styled.div`
 `;
 
 const CharacterImg = styled.img`
-  max-height:100%;
+  max-height: 100%;
 `;
 
 const NFTCard: React.FC = () => {
@@ -244,8 +240,7 @@ const NFTCard: React.FC = () => {
                           <ContentWrapper>
                             <Content>
                               <Frame>
-                              <CharacterImg src={cardimage}/>
-                                
+                                <CharacterImg src={cardimage} />
                               </Frame>
                             </Content>
                           </ContentWrapper>
