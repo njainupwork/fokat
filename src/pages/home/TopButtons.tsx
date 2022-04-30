@@ -202,7 +202,7 @@ const TopButtons: React.FC = () => {
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3] ? tx[3][0] : "",
+        characterSelected: tx[3].length ? tx[3][0]: -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -313,8 +313,8 @@ const TopButtons: React.FC = () => {
       getAndDispatchPosition(true);
     });
   };
-  if (characterSelected == -1) {
-    // return <NFTCard />;
+  if (characterSelected == -1 || !characterSelected) {
+    return <NFTCard />;
   }
   return (
     <>
@@ -377,7 +377,6 @@ const TopButtons: React.FC = () => {
           received={received}
         />
       )}
-      {characterSelected == -1 && <NFTCard />}
 
       {/* <Grid /> */}
     </>
