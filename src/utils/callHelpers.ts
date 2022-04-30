@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { ethers } from "ethers";
+import { getBoardAddress } from "utils/addressHelpers"
 
 export const approve = async (lpContract, masterChefContract, account) => {
   return lpContract.methods
@@ -52,12 +53,26 @@ export const getUserOwnedTokens = async (nft, account) => {
   return userTokens;
 };
 
+export const approveNft = async (nft, account, nftId) => {
+  console.log(
+    "🚀 ~ file: callHelpers.ts ~ line 45 ~ getUserOwnedTokens ~ getUserOwnedTokens",
+    account
+  );
+  const approved = await nft.methods
+    .approve(getBoardAddress(), nftId)
+    .send({ from: account })
+    .on("transactionHash", (tx) => {
+      console.log("🚀 ~ file: callHelpers.ts ~ line 64 ~ .on ~ tx", tx);
+      return tx.transactionHash;
+    });
+  return approved;
+};
 export const enterGame = async (board, nftId, account) => {
   const enterGame = await board.methods
-    .EnterGame([nftId])
-    .send({from: account})
+    .EnterGame(nftId)
+    .send({ from: account })
     .on("transactionHash", (tx) => {
-      console.log("🚀 ~ file: callHelpers.ts ~ line 60 ~ .on ~ tx", tx)
+      console.log("🚀 ~ file: callHelpers.ts ~ line 60 ~ .on ~ tx", tx);
       return tx.transactionHash;
     });
   return enterGame;

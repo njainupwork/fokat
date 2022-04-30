@@ -36,9 +36,9 @@
   
   "Success": "Success",
   "error_occurred": "An error occurred!",
-  "fetching_nfts": "Fetching NFTs",
+  "Fetching NFTs": "Fetching NFTs",
   "select_characters": "Select Characters",
-  "no_nft_tokens": "You do not have any NFT Tokens",
+  "You do not have any NFT Tokens. Please Purchase at": "You do not have any NFT Tokens",
   "change_cam": "Change Cam",
   "rolling": "Rolling...",
   "roll": "Roll",

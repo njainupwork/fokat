@@ -54,5 +54,24 @@
   "Register Failed": "登録に失敗しました",
   "We are seeking to raise $9 million via this round of Pre-Sales to enable higher quality development and marketing of Monopolon to the community.": "コミュニティへのMonopolonのより高品質な開発とマーケティングを可能にするために、このラウンドのプリセールスを通じて900万ドルを調達しようとしています。",
   "The Monopolon envision ourselves to bring back the simple dice roll game that we had grown up with, combining the Play-To-Earn model and integrating the system with exclusive NFTs usable in-game. Creating a long-term sustainable game ecosystem Turning Virtual Into Reality and a chance to grow from Rags-to-Riches!": "Monopolonは、Play-To-Earnモデルを組み合わせ、システムをゲーム内で使用可能な専用NFTと統合することで、私たちが育ったシンプルなサイコロロールゲームを復活させることを想定しています。長期的に持続可能なゲームエコシステムを作成することで、仮想を現実に変え、Rags-to-Richesから成長するチャンスを手に入れましょう！",
-  "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLONはMonopolonの主要通貨であり、プレイヤーはゲームに参加するためにNFTキャラクターを購入できます。正式な発売前に、MONOPOLONはMLONの総供給量の1％をプリセールスに使用します。 MLONは発売時に$ 1.00で上場されます。合計20,000,000のトークンが、ホワイトリストに登録されたプリセールス（$ 0.40）とプライベートセールス（$ 0.50）に分類されます。"
+  "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLONはMonopolonの主要通貨であり、プレイヤーはゲームに参加するためにNFTキャラクターを購入できます。正式な発売前に、MONOPOLONはMLONの総供給量の1％をプリセールスに使用します。 MLONは発売時に$ 1.00で上場されます。合計20,000,000のトークンが、ホワイトリストに登録されたプリセールス（$ 0.40）とプライベートセールス（$ 0.50）に分類されます。",
+
+  "Success": "成功",
+  "error_occurred": "エラーが発生しました",
+  "Fetching NFTs": "NFTの取得",
+  "select_characters": "选择字符",
+  "You do not have any NFT Tokens. Please Purchase at": "NFTトークンがありません。で購入してください",
+  "change_cam": "カメラを変える",
+  "rolling": "圧延",
+  "roll": "ロール",
+  "grid_info": "グリッド情報",
+  "rewards": "報酬",
+  "received_tokens": "受け取ったトークン ",
+  "view_transaction": "BSCでトランザクションを表示",
+  "close": "選ぶ",
+  "tokens": "トークン",
+  
+  "100": "100",
+  "200": "200",
+  "300": "300"
 }

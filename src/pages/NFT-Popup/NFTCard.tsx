@@ -40,7 +40,7 @@ const CardContainer = styled.div`
 
   display: block;
   flex-direction: column;
-  overflow: scroll;
+  overflow: hidden;
   display: grid;
 `;
 
@@ -91,7 +91,7 @@ const Text1 = styled.div`
   @media (max-width: 425px) {
     font-size: 16px;
   }
-  text-align:center;
+  text-align: center;
 `;
 const Text2 = styled.div`
   font-family: Open Sans;
@@ -162,14 +162,13 @@ const CharacterImg = styled.img`
 
 const NFTCard: React.FC = () => {
   const { account } = useWeb3React();
-  const { getUserTokens, enterGame } = useCharacter();
+  const { getUserTokens, enterGame, approveNFT } = useCharacter();
   const [loading, setLoading] = useState(false);
   const [tokens, setTokens] = useState(null);
   const { toastSuccess, toastError } = useToast();
-  const {t, currentLanguage} = useTranslation();
-  const {locale} = currentLanguage;
-  console.log("🚀 ~ file: NFTCard.tsx ~ line 171 ~ locale", locale)
-  
+  const { t, currentLanguage } = useTranslation();
+  const { locale } = currentLanguage;
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!account) {
@@ -186,42 +185,42 @@ const NFTCard: React.FC = () => {
           chunks.push(tokens.slice(i, i + chunkSize));
         }
         setTokens(chunks);
-        console.log(
-          "🚀 ~ file: NFTCard.tsx ~ line 148 ~ useEffect ~ tokens",
-          chunks
-        );
       });
     }, 3500);
   }, [account]);
   const selectCharacter = (token: number) => {
-    console.log(
-      "🚀 ~ file: NFTCard.tsx ~ line 182 ~ selectCharacter ~ token",
-      token
-    );
-    enterGame(token).then((info) => {
-      console.log("🚀 ~ file: NFTCard.tsx ~ line 180 ~ enterGame ~ info", info);
-      if (!info) {
+    approveNFT(token).then((approve) => {
+      if (!approve) {
         toastError("", t("error_occurred"));
         return;
       }
-      toastSuccess("", t("Success"));
-      dispatch({
-        type: "characterSelected",
-        token: token,
+      enterGame(token).then((info) => {
+        if (!info) {
+          toastError("", t("error_occurred"));
+          return;
+        }
+        toastSuccess("", t("Success"));
+        dispatch({
+          type: "characterSelected",
+          token: token,
+        });
       });
     });
   };
   if (loading == true) {
     return (
       <Container>
-        <Title>{t("fetching_nfts")}</Title>
+        <Title>{t("Fetching NFTs")}</Title>
       </Container>
     );
   }
   if (!tokens || !tokens.length) {
     return (
       <Container>
-        <Title>{t("no_nft_tokens")}</Title>
+        <Title>
+          {t("You do not have any NFT Tokens. Please Purchase at")}{" "}
+          https://marketplace.monopolon.io/
+        </Title>
       </Container>
     );
   }

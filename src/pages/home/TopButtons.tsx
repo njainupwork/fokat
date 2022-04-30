@@ -266,7 +266,7 @@ const TopButtons: React.FC = () => {
       }
 
       const etherValue = Web3.utils.fromWei(
-        rewards.rewards.toString(),
+        rewards.toString(),
         "ether"
       );
 

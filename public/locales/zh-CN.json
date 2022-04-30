@@ -90,9 +90,9 @@
 
   "Success": "成功",
   "error_occurred": "发生错误",
-  "fetching_nfts": "抓取 NFTs",
+  "Fetching NFTs": "抓取 NFTs",
   "select_characters": "选择字符",
-  "no_nft_tokens": "您没有任何 NFT 代币",
+  "You do not have any NFT Tokens. Please Purchase at": "您没有任何 NFT 代币",
   "change_cam": "切换镜头",
   "rolling": "滚动...",
   "roll": "卷",
@@ -102,7 +102,8 @@
   "view_transaction": "在 BSC 扫描处查看交易",
   "close": "关闭",
   "tokens": "代币",
-  "100": "一百",
-  "200": "二百",
-  "300": "三百"
+  
+  "100": "100",
+  "200": "200",
+  "300": "300"
 }
