@@ -1,7 +1,7 @@
 export default {
   board: {
     97: "0x094714b939981d92620e6cff1f7d4147c754bcd4",
-    56: "0xccace04f3239107f9a264913828ff3badc65d1ba",
+    56: "0xc0fb7da30bfa025b37d088566daccff4f1337974",
   },
   nft: {
     97: "0xf762ad2378e049cf7b5c42a212210a69dac4f624",
