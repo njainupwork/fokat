@@ -5,7 +5,7 @@ export default {
   },
   nft: {
     97: "0xf762ad2378e049cf7b5c42a212210a69dac4f624",
-    56: "0x41f58f03A085d6E6d4e6c23D104C5F69787890e1",
+    56: "0x5f8f682A9dd9dc399acBdfcf3393aff680f1F22F",
   },
   multiCall: {
     56: "0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B",
