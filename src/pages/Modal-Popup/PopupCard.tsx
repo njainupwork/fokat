@@ -121,7 +121,7 @@ const PopupCard: React.FC<Props> = ({ closePopup, txId, received }) => {
         <ButtonContainer>
           <ViewButton
             onClick={() =>
-              window.open(`https://testnet.bscscan.com/tx/${txId}`, "_blank")
+              window.open(`https://bscscan.com/tx/${txId}`, "_blank")
             }
           >
             {t("View Transaction")}

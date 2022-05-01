@@ -191,13 +191,13 @@ const NFTCard: React.FC = () => {
   const selectCharacter = (token: number) => {
     approveNFT(token).then((approve) => {
       if (!approve) {
-        toastError("", t("error_occurred"));
+        toastError("", t("Error Occurred"));
         return;
       }
       toastSuccess("", t("Approved"));
       enterGame(token).then((info) => {
         if (!info) {
-          toastError("", t("error_occurred"));
+          toastError("", t("Error Occurred"));
           return;
         }
         toastSuccess("", t("Success"));
@@ -228,7 +228,7 @@ const NFTCard: React.FC = () => {
   return (
     <>
       <Container>
-        <Title>{t("select_characters")}</Title>
+        <Title>{t("Select Character")}</Title>
         <CardContainer>
           {!loading &&
             tokens &&

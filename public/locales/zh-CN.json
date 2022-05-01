@@ -89,9 +89,9 @@
   "MLON is the main currency of Monopolon which allows players to purchase NFT characters in order to participate in the game. Before official launch MONOPOLON will be taking 1% of total MLON supply to be doing Pre-Sales. MLON will be listing at $1.00 at launch. A total of 20,000,000 tokens will be breakdown into white-listed Pre-Sales at $0.40 and private sales at $0.50.": "MLON 是 Monopolon 的主要货币，允许玩家购买 NFT 角色以参与游戏。在正式推出之前，MONOPOLON 将占 MLON 总供应量的 1% 进行预售。 MLON 将在发布时以 1.00 美元的价格上市。总共 20,000,000 个代币将分为 0.40 美元的白名单预售和 0.50 美元的私人销售。",
 
   "Success": "成功",
-  "error_occurred": "发生错误",
+  "Error Occurred": "发生错误",
   "Fetching NFTs": "抓取 NFTs",
-  "select_characters": "选择字符",
+  "Select Character": "选择字符",
   "You do not have any NFT Tokens. Please Purchase at": "您没有任何 NFT 代币",
   "Change Camera": "切换镜头",
   "rolling": "滚动...",
