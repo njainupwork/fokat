@@ -194,6 +194,7 @@ const NFTCard: React.FC = () => {
         toastError("", t("error_occurred"));
         return;
       }
+      toastSuccess("", t("Approved"));
       enterGame(token).then((info) => {
         if (!info) {
           toastError("", t("error_occurred"));

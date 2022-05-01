@@ -1,11 +1,11 @@
 export default {
   board: {
     97: "0x094714b939981d92620e6cff1f7d4147c754bcd4",
-    56: "",
+    56: "0xb4B5015c389fd2D6A6a76E2e005b7C4D8b97D73f",
   },
   nft: {
     97: "0xf762ad2378e049cf7b5c42a212210a69dac4f624",
-    56: "",
+    56: "0x41f58f03A085d6E6d4e6c23D104C5F69787890e1",
   },
   multiCall: {
     56: "0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B",
