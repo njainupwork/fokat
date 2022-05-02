@@ -181,6 +181,9 @@ const NFTCard: React.FC = () => {
       getUserTokens().then((tokens) => {
         setLoading(false);
         console.log("tiers", tiers);
+        if(!tokens){
+          return;
+        }
         tokens = tokens.map(async (token) => {
           console.log(
             "🚀 ~ file: NFTCard.tsx ~ line 192 ~ tokens=tokens.map ~ token",

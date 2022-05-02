@@ -21,6 +21,8 @@ import myequipment from "../../assets/equipment.png";
 import NFTCard from "pages/NFT-Popup/NFTCard";
 import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
+import { useCountdown } from "hooks/useCountDown";
+import CountdownTimer from "./CountDown";
 
 const MyEquipmentButton = styled.button`
   width: 211px;
@@ -163,13 +165,18 @@ const TopButtons: React.FC = () => {
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
   const {t} = useTranslation();
-  let time = "";
+  
 
+  let time = "";
+  let rollingAt = "";
+ 
   const { nextDiceRoll, diceAvailable } = dice;
   if (nextDiceRoll > 0 && parseInt(diceAvailable) <= 1) {
     const t = moment(nextDiceRoll * 1000);
+    
     if (t.diff(moment()) > 0) {
       time = t.local().fromNow();
+      rollingAt = t.local().format("HH:mm");
       time = `You can roll the dice ${time}`;
     }
     console.log("🚀 ~ file: TopButtons.tsx ~ line 136 ~ @media ~ time", time);
@@ -365,6 +372,8 @@ const TopButtons: React.FC = () => {
             >
               {rolling ? t("rolling") : t("roll")}
             </DiceRollButton>
+            
+            {time && <CountdownTimer targetDate={nextDiceRoll * 1000}/>}
           </>
         ) : (
           <UnlockButton />
