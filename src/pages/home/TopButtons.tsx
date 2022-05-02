@@ -21,7 +21,7 @@ import myequipment from "../../assets/equipment.png";
 import NFTCard from "pages/NFT-Popup/NFTCard";
 import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
-import { useCountdown } from "hooks/useCountDown";
+import { useCharacter } from "hooks/useCharacter";
 import CountdownTimer from "./CountDown";
 
 const MyEquipmentButton = styled.button`
@@ -165,6 +165,7 @@ const TopButtons: React.FC = () => {
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
   const { t } = useTranslation();
+  const { isEntered } = useCharacter();
 
   let time = "";
   let rollingAt = "";
@@ -178,7 +179,6 @@ const TopButtons: React.FC = () => {
       rollingAt = t.local().format("HH:mm");
       time = `You can roll the dice ${time}`;
     }
-    console.log("🚀 ~ file: TopButtons.tsx ~ line 136 ~ @media ~ time", time);
   }
 
   // const playAudio = () => {
@@ -188,9 +188,7 @@ const TopButtons: React.FC = () => {
     setPlaying(!playing);
   };
   const getAndDispatchPosition = async (showToast = false) => {
-    getPosition().then((tx) => {
-      console.log("gridPosition_tx", tx, account);
-
+    getPosition().then(async (tx) => {
       if (!tx) {
         dispatch({
           type: "userInfos",
@@ -203,7 +201,19 @@ const TopButtons: React.FC = () => {
         });
         return;
       }
-
+      const entered = await isEntered();
+      if (!entered) {
+        dispatch({
+          type: "userInfos",
+          diceAvailable: 0,
+          nextDiceRoll: 0,
+          gridPosition: -1,
+          characterSelected: -1,
+          roll1: 1,
+          roll2: 1,
+        });
+        return;
+      }
       dispatch({
         type: "userInfos",
         diceAvailable: tx[1],
@@ -231,7 +241,6 @@ const TopButtons: React.FC = () => {
   };
   window.onload = () => {
     if (playing === false) {
-      console.log("Loading audio");
       audio.play();
     } else if (playing === true) {
       audio.pause();
@@ -255,11 +264,6 @@ const TopButtons: React.FC = () => {
     if (characterSelected == -1) {
       return;
     }
-    console.log(
-      "🚀 ~ file: TopButtons.tsx ~ line 207 ~ useEffect ~ characterSelected",
-      characterSelected,
-      account
-    );
     getAndDispatchPosition();
   }, [account, characterSelected]);
   const closePopupCard = () => {
@@ -288,14 +292,12 @@ const TopButtons: React.FC = () => {
   const dispatch = useDispatch();
   const changeCam = () => {
     let newCam = "grid";
-    console.log("changeCam", newCam);
 
     if (cam == "grid") {
       newCam = "character";
     } else if (cam == "character") {
       newCam = "region";
     }
-    console.log("changeCam", newCam);
     dispatch({
       type: "changeCam",
       cameraType: newCam,
