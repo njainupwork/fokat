@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { useBoardContract } from "./useContract";
-import { gridInfos, rollDice, userInfo, userInfos } from "utils/callHelpers";
+import { checkGridInfos, rollDice, userInfo, userInfos } from "utils/callHelpers";
 
 export const useDiceRoll = () => {
   const { account } = useWeb3React();
@@ -31,7 +31,7 @@ export const useDiceRoll = () => {
   
   const handleGetRewards = useCallback(async (gridPosition) => {
     try {
-      const tx = await gridInfos(boardContract, gridPosition);
+      const tx = await checkGridInfos(boardContract, account, gridPosition);
       // const user = await handleUserInfo();
       console.log("txHagetRewardsh_gridInfos", tx);
 

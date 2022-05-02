@@ -264,7 +264,12 @@ const TopButtons: React.FC = () => {
       if (!rewards) {
         return;
       }
-      return rewards.toString();
+      const etherValue = Web3.utils.fromWei(
+        rewards.toString(),
+        "ether"
+      );
+
+      return etherValue;
     });
   };
   useEffect(() => {
