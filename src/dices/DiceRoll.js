@@ -22,12 +22,13 @@ export default function DiceRoll1({ ...props }) {
   }, [props.rand])
 
   const { nodes, materials, animations } = useGLTF(`assets/dices/DiceRoll${props.number}.gltf`)
+  console.log('materials', materials)
   const { actions } = useAnimations(animations, group)
   const scale = .8;
   return (
     <group ref={group} {...props} dispose={null} scale={new Vector3(scale, scale, scale)}>
       <group>
-        <mesh name="Cube" geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[-7.8, 1.26, 9.26]} rotation={[0.79, 0.19, -0.94]} />
+        <mesh name="Cube" geometry={nodes.Cube.geometry} material={materials['Material']} position={[-7.8, 1.26, 9.26]} rotation={[0.79, 0.19, -0.94]} />
       </group>
     </group>
   )
