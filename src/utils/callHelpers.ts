@@ -43,6 +43,14 @@ export const gridInfos = async (board, gridPosition) => {
   const gridInfos = await board.methods.gridInfos(gridPosition).call();
   return gridInfos;
 };
+export const checkGridInfos = async (board, account, gridPosition) => {
+  console.log(
+    "🚀 ~ file: callHelpers.ts ~ line 38 ~ gridInfos ~ gridPosition",
+    gridPosition
+  );
+  const gridInfos = await board.methods.checkGridInfo(account,gridPosition).call();
+  return gridInfos;
+};
 
 export const getUserOwnedTokens = async (nft, account) => {
   console.log(

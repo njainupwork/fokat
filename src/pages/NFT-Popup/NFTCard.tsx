@@ -6,6 +6,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useCharacter } from "hooks/useCharacter";
 import { useDispatch } from "react-redux";
 import useToast from "hooks/useToast";
+import tiers from "../../config/tier.json";
 import { useTranslation } from "contexts/Localization";
 const Container = styled.div`
   background: inherit;
@@ -179,15 +180,43 @@ const NFTCard: React.FC = () => {
     setTimeout(() => {
       getUserTokens().then((tokens) => {
         setLoading(false);
-        const chunkSize = 3;
-        const chunks = [];
-        for (let i = 0; i < tokens.length; i += chunkSize) {
-          chunks.push(tokens.slice(i, i + chunkSize));
+        console.log("tiers", tiers);
+        if(!tokens){
+          return;
         }
-        setTokens(chunks);
+        tokens = tokens.map(async (token) => {
+          console.log(
+            "🚀 ~ file: NFTCard.tsx ~ line 192 ~ tokens=tokens.map ~ token",
+            token
+          );
+          const filename = tiers[parseInt(token)]["name"];
+          console.log(
+            "🚀 ~ file: NFTCard.tsx ~ line 190 ~ tokens=tokens.map ~ filename",
+            filename
+          );
+
+          return {
+            image: await import(`../../assets/characters/${filename}`),
+            id: token,
+          };
+        });
+        Promise.all(tokens).then((results) => {
+          console.log(
+            "🚀 ~ file: NFTCard.tsx ~ line 201 ~ Promise.all ~ results",
+            results
+          );
+          tokens = results;
+          const chunkSize = 3;
+          const chunks = [];
+          for (let i = 0; i < tokens.length; i += chunkSize) {
+            chunks.push(tokens.slice(i, i + chunkSize));
+          }
+          setTokens(chunks);
+        });
       });
     }, 3500);
   }, [account]);
+
   const selectCharacter = (token: number) => {
     approveNFT(token).then((approve) => {
       if (!approve) {
@@ -220,7 +249,9 @@ const NFTCard: React.FC = () => {
       <Container>
         <Title>
           {t("You do not have any NFT Tokens. Please Purchase at")}{" "}
-          <a target={"_blank"} href="https://marketplace.monopolon.io/">https://marketplace.monopolon.io/</a>
+          <a target={"_blank"} href="https://marketplace.monopolon.io/">
+            https://marketplace.monopolon.io/
+          </a>
         </Title>
       </Container>
     );
@@ -236,20 +267,25 @@ const NFTCard: React.FC = () => {
               return (
                 <Row>
                   {chunk.map((token) => {
+                    console.log(
+                      "🚀 ~ file: NFTCard.tsx ~ line 262 ~ {chunk.map ~ token",
+                      token
+                    );
+                    const img = token["image"]["default"];
                     return (
                       <>
-                        <NFT onClick={() => selectCharacter(token)}>
+                        <NFT onClick={() => selectCharacter(token["id"])}>
                           <ContentWrapper>
                             <Content>
                               <Frame>
-                                <CharacterImg src={cardimage} />
+                                <CharacterImg src={img} />
                               </Frame>
                             </Content>
                           </ContentWrapper>
                           {/* <Tag>Token {token}</Tag> */}
 
                           <Box>
-                            <Text1>NFT {token}</Text1>
+                            <Text1>NFT {token["id"]}</Text1>
                             {/* <Text2>level</Text2> */}
                           </Box>
                         </NFT>

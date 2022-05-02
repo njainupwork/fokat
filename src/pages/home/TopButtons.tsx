@@ -21,6 +21,8 @@ import myequipment from "../../assets/equipment.png";
 import NFTCard from "pages/NFT-Popup/NFTCard";
 import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
+import { useCountdown } from "hooks/useCountDown";
+import CountdownTimer from "./CountDown";
 
 const MyEquipmentButton = styled.button`
   width: 211px;
@@ -162,14 +164,18 @@ const TopButtons: React.FC = () => {
   const [cam, setCam] = useState("grid");
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
+
   let time = "";
+  let rollingAt = "";
 
   const { nextDiceRoll, diceAvailable } = dice;
   if (nextDiceRoll > 0 && parseInt(diceAvailable) <= 1) {
     const t = moment(nextDiceRoll * 1000);
+
     if (t.diff(moment()) > 0) {
       time = t.local().fromNow();
+      rollingAt = t.local().format("HH:mm");
       time = `You can roll the dice ${time}`;
     }
     console.log("🚀 ~ file: TopButtons.tsx ~ line 136 ~ @media ~ time", time);
@@ -203,7 +209,7 @@ const TopButtons: React.FC = () => {
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3].length ? tx[3][0]: -1,
+        characterSelected: tx[3].length ? tx[3][0] : -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -264,7 +270,9 @@ const TopButtons: React.FC = () => {
       if (!rewards) {
         return;
       }
-      return rewards.toString();
+      const etherValue = Web3.utils.fromWei(rewards.toString(), "ether");
+
+      return etherValue;
     });
   };
   useEffect(() => {
@@ -303,7 +311,7 @@ const TopButtons: React.FC = () => {
         toastError("Error", t("Transaction Failed."));
         return;
       }
-      
+
       setTx(tx.transactionHash);
       getAndDispatchPosition(true);
     });
@@ -315,8 +323,10 @@ const TopButtons: React.FC = () => {
     <>
       {hover != -1 ? (
         <HoverDiv>
-          <h3>{t("grid_info")}</h3>
-          <p>{t(rewards)} MGM {t("tokens")}</p>
+          <h3>{t("Grid Info")}</h3>
+          <p>
+            {t(rewards)} MGM {t("tokens")}
+          </p>
         </HoverDiv>
       ) : (
         ""
@@ -350,7 +360,9 @@ const TopButtons: React.FC = () => {
       </ButtonBox>
       <Grid />
       <RollButton>
-        <DiceRollButton onClick={changeCam}>{t("Change Camera")}</DiceRollButton>
+        <DiceRollButton onClick={changeCam}>
+          {t("Change Camera")}
+        </DiceRollButton>
         {account ? (
           <>
             <DiceRollButton
@@ -358,7 +370,8 @@ const TopButtons: React.FC = () => {
               title={time}
               disabled={time !== "" || rolling}
             >
-              {rolling ? t("rolling") : t("roll")}
+              {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
+              {!time && (rolling ? t("rolling") : t("Roll"))}
             </DiceRollButton>
           </>
         ) : (
