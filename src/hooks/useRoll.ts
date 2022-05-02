@@ -38,7 +38,7 @@ export const useDiceRoll = () => {
 
       return tx;
     } catch (e) {
-      console.log('txHash_grid_info_e', e)
+      console.log('txHash_Grid Info_e', e)
       return false;
     }
   }, [account, boardContract]);

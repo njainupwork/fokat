@@ -323,7 +323,7 @@ const TopButtons: React.FC = () => {
     <>
       {hover != -1 ? (
         <HoverDiv>
-          <h3>{t("grid_info")}</h3>
+          <h3>{t("Grid Info")}</h3>
           <p>
             {t(rewards)} MGM {t("tokens")}
           </p>
@@ -371,7 +371,7 @@ const TopButtons: React.FC = () => {
               disabled={time !== "" || rolling}
             >
               {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
-              {rolling ? t("rolling") : t("roll")}
+              {!time && (rolling ? t("rolling") : t("Roll"))}
             </DiceRollButton>
           </>
         ) : (
