@@ -104,10 +104,9 @@ export default function Plane(props) {
         In this case, it is just a uniform green
       */}
       <meshBasicMaterial
-        color="white"
-        side={DoubleSide}
-        opacity={0.5}
-        wireframe={false}
+        attach="material"
+    color="black"
+    opacity={0.5}
       />
     </mesh>
   );
