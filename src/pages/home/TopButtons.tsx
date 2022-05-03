@@ -165,7 +165,7 @@ const TopButtons: React.FC = () => {
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
   const { t } = useTranslation();
-  const { isEntered } = useCharacter();
+  const { isEntered, getUserTokens } = useCharacter();
 
   let time = "";
   let rollingAt = "";
@@ -189,20 +189,8 @@ const TopButtons: React.FC = () => {
   };
   const getAndDispatchPosition = async (showToast = false) => {
     getPosition().then(async (tx) => {
-      if (!tx) {
-        dispatch({
-          type: "userInfos",
-          diceAvailable: 0,
-          nextDiceRoll: 0,
-          gridPosition: -1,
-          characterSelected: -1,
-          roll1: 1,
-          roll2: 1,
-        });
-        return;
-      }
       const entered = await isEntered();
-      if (!entered) {
+      if (!tx || !entered) {
         dispatch({
           type: "userInfos",
           diceAvailable: 0,
@@ -214,12 +202,13 @@ const TopButtons: React.FC = () => {
         });
         return;
       }
+      
       dispatch({
         type: "userInfos",
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3].length ? tx[3][0] : -1,
+        characterSelected: tx[3].length && entered ? tx[3][0] : -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -318,6 +307,7 @@ const TopButtons: React.FC = () => {
       getAndDispatchPosition(true);
     });
   };
+  console.log('characterSelected_characterSelected', characterSelected)
   if (characterSelected == -1 || !characterSelected) {
     return <NFTCard />;
   }
