@@ -160,5 +160,7 @@
 "382": {"name": "rare3.png","tier":1},
 "383": {"name": "rare4.png","tier":1},
 "384": {"name": "rare5.png","tier":1},
-"385": {"name": "mythic.jpg","385tier":4}
+"385": {"name": "mythic.jpg","385tier":4},
+"219": {"name": "mythic.jpg","385tier":4},
+"209": {"name": "mythic.jpg","385tier":4}
 }
