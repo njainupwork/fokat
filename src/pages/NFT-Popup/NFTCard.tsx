@@ -243,7 +243,7 @@ const NFTCard: React.FC = () => {
       </Container>
     );
   }
-  console.log('tokens.length',tokens.length)
+  console.log('tokens.length',tokens)
   if (!tokens || !tokens.length) {
     return (
       <Container>
