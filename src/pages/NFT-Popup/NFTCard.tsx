@@ -199,6 +199,8 @@ const NFTCard: React.FC = () => {
             id: token,
           };
         });
+
+        console.log("🚀 ~ file: NFTCard.tsx ~ line 204 ~ Promise.all ~ tokens", tokens)
         Promise.all(tokens).then((results) => {
           console.log(
             "🚀 ~ file: NFTCard.tsx ~ line 201 ~ Promise.all ~ results",
@@ -242,6 +244,7 @@ const NFTCard: React.FC = () => {
       </Container>
     );
   }
+  console.log('tokens.length',tokens)
   if (!tokens || !tokens.length) {
     return (
       <Container>
