@@ -21,7 +21,7 @@ import myequipment from "../../assets/equipment.png";
 import NFTCard from "pages/NFT-Popup/NFTCard";
 import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
-import { useCountdown } from "hooks/useCountDown";
+import { useCharacter } from "hooks/useCharacter";
 import CountdownTimer from "./CountDown";
 
 const MyEquipmentButton = styled.button`
@@ -165,6 +165,7 @@ const TopButtons: React.FC = () => {
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
   const { t } = useTranslation();
+  const { isEntered, getUserTokens } = useCharacter();
 
   let time = "";
   let rollingAt = "";
@@ -178,7 +179,6 @@ const TopButtons: React.FC = () => {
       rollingAt = t.local().format("HH:mm");
       time = `You can roll the dice ${time}`;
     }
-    console.log("🚀 ~ file: TopButtons.tsx ~ line 136 ~ @media ~ time", time);
   }
 
   // const playAudio = () => {
@@ -188,10 +188,9 @@ const TopButtons: React.FC = () => {
     setPlaying(!playing);
   };
   const getAndDispatchPosition = async (showToast = false) => {
-    getPosition().then((tx) => {
-      console.log("gridPosition_tx", tx, account);
-
-      if (!tx) {
+    getPosition().then(async (tx) => {
+      const entered = await isEntered();
+      if (!tx || !entered) {
         dispatch({
           type: "userInfos",
           diceAvailable: 0,
@@ -203,13 +202,13 @@ const TopButtons: React.FC = () => {
         });
         return;
       }
-
+      
       dispatch({
         type: "userInfos",
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3].length ? tx[3][0] : -1,
+        characterSelected: tx[3].length && entered ? tx[3][0] : -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -231,7 +230,6 @@ const TopButtons: React.FC = () => {
   };
   window.onload = () => {
     if (playing === false) {
-      console.log("Loading audio");
       audio.play();
     } else if (playing === true) {
       audio.pause();
@@ -255,11 +253,6 @@ const TopButtons: React.FC = () => {
     if (characterSelected == -1) {
       return;
     }
-    console.log(
-      "🚀 ~ file: TopButtons.tsx ~ line 207 ~ useEffect ~ characterSelected",
-      characterSelected,
-      account
-    );
     getAndDispatchPosition();
   }, [account, characterSelected]);
   const closePopupCard = () => {
@@ -288,14 +281,12 @@ const TopButtons: React.FC = () => {
   const dispatch = useDispatch();
   const changeCam = () => {
     let newCam = "grid";
-    console.log("changeCam", newCam);
 
     if (cam == "grid") {
       newCam = "character";
     } else if (cam == "character") {
       newCam = "region";
     }
-    console.log("changeCam", newCam);
     dispatch({
       type: "changeCam",
       cameraType: newCam,
@@ -316,6 +307,7 @@ const TopButtons: React.FC = () => {
       getAndDispatchPosition(true);
     });
   };
+  console.log('characterSelected_characterSelected', characterSelected)
   if (characterSelected == -1 || !characterSelected) {
     return <NFTCard />;
   }

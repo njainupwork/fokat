@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { ethers } from "ethers";
-import { getBoardAddress } from "utils/addressHelpers"
+import { getBoardAddress } from "utils/addressHelpers";
 
 export const approve = async (lpContract, masterChefContract, account) => {
   return lpContract.methods
@@ -36,52 +36,46 @@ export const userInfo = async (board, account) => {
   return userInfos;
 };
 export const gridInfos = async (board, gridPosition) => {
-  console.log(
-    "🚀 ~ file: callHelpers.ts ~ line 38 ~ gridInfos ~ gridPosition",
-    gridPosition
-  );
   const gridInfos = await board.methods.gridInfos(gridPosition).call();
   return gridInfos;
 };
 export const checkGridInfos = async (board, account, gridPosition) => {
-  console.log(
-    "🚀 ~ file: callHelpers.ts ~ line 38 ~ gridInfos ~ gridPosition",
-    gridPosition
-  );
-  const gridInfos = await board.methods.checkGridInfo(account,gridPosition).call();
+  const gridInfos = await board.methods
+    .checkGridInfo(account, gridPosition)
+    .call();
   return gridInfos;
 };
 
 export const getUserOwnedTokens = async (nft, account) => {
-  console.log(
-    "🚀 ~ file: callHelpers.ts ~ line 45 ~ getUserOwnedTokens ~ getUserOwnedTokens",
-    account
-  );
   const userTokens = await nft.methods.getUserOwnedTokens(account).call();
   return userTokens;
 };
 
 export const approveNft = async (nft, account, nftId) => {
-  console.log(
-    "🚀 ~ file: callHelpers.ts ~ line 45 ~ getUserOwnedTokens ~ getUserOwnedTokens",
-    account
-  );
   const approved = await nft.methods
     .approve(getBoardAddress(), nftId)
     .send({ from: account })
     .on("transactionHash", (tx) => {
-      console.log("🚀 ~ file: callHelpers.ts ~ line 64 ~ .on ~ tx", tx);
       return tx.transactionHash;
     });
   return approved;
 };
+
+export const isEntered = async (board, account) => {
+  const entered = await board.methods.isEntered(account).call();
+  return entered;
+};
+export const ExitGame = async (board, nftId) => {
+  return await board.methods.ExitGame(nftId).on("transactionHash", (tx) => {
+    return tx.transactionHash;
+  });
+};
+
 export const enterGame = async (board, nftId, account) => {
-  const enterGame = await board.methods
+  return await board.methods
     .EnterGame(nftId)
     .send({ from: account })
     .on("transactionHash", (tx) => {
-      console.log("🚀 ~ file: callHelpers.ts ~ line 60 ~ .on ~ tx", tx);
       return tx.transactionHash;
     });
-  return enterGame;
 };
