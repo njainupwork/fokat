@@ -200,6 +200,7 @@ const NFTCard: React.FC = () => {
           };
         });
 
+        console.log("🚀 ~ file: NFTCard.tsx ~ line 204 ~ Promise.all ~ tokens", tokens)
         Promise.all(tokens).then((results) => {
           console.log(
             "🚀 ~ file: NFTCard.tsx ~ line 201 ~ Promise.all ~ results",
