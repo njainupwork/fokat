@@ -1,17 +1,19 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react"
-import { LangSelector } from "@kenjiwb/uikit"
-import styled from "styled-components"
-import { MenuOutlined } from "@ant-design/icons"
+import React from "react";
+import { LangSelector } from "@kenjiwb/uikit";
+import styled from "styled-components";
+import { MenuOutlined } from "@ant-design/icons";
 
 //account details
-import { useWeb3React } from "@web3-react/core"
-import useAuth from "hooks/useAuth"
+import { useWeb3React } from "@web3-react/core";
+import useAuth from "hooks/useAuth";
 
-import UserBlock from "components/UserBlock"
-import { languageList } from "config/localization/languages"
-import { useTranslation } from "contexts/Localization"
+import UserBlock from "components/UserBlock";
+import { languageList } from "config/localization/languages";
+import { useTranslation } from "contexts/Localization";
+import Swap from "../../assets/swap.svg";
+import Marketplace from "../../assets/marketplace.svg";
 
 const NavbarContainer = styled.div`
   .ui.menu {
@@ -28,7 +30,7 @@ const NavbarContainer = styled.div`
   // border-color: rgb(155, 155, 155);
   border-opacity: 1;
   // border-bottom: 1px;
-`
+`;
 
 const Logo = styled.img`
   height: 6em;
@@ -37,7 +39,7 @@ const Logo = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const Menu = styled.div`
   display: flex;
@@ -45,14 +47,14 @@ const Menu = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-right: 1rem;
-`
+`;
 
 const List = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 5px;
-`
+`;
 
 const MenuBar = styled.div`
   position: relative;
@@ -64,7 +66,7 @@ const MenuBar = styled.div`
       display: block;
     }
   }
-`
+`;
 
 const MenuOptionContainter = styled.div`
   background: rgb(32, 34, 49);
@@ -77,7 +79,7 @@ const MenuOptionContainter = styled.div`
   top: 30px;
   border-radius: 10px;
   padding: 20px 5px;
-`
+`;
 
 const MenuContainter = styled.div`
   text-align: center;
@@ -88,7 +90,7 @@ const MenuContainter = styled.div`
   @media (max-width: 769px) {
     display: none;
   }
-`
+`;
 
 const Token = styled.div`
   padding: 5px;
@@ -99,23 +101,25 @@ const Token = styled.div`
   display: flex;
   justify-content: center;
   columngap: 5px;
-`
+`;
 const TextEllipsis = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`
+  display: flex;
+  align-items: center;
+`;
 
 const StyledLink = styled.a`
   color: white;
   text-decoration: none;
-  font-size: 20px;
-`
+  font-size: 12px;
+`;
 
 const NavBar = () => {
-  const { currentLanguage, setLanguage } = useTranslation()
-  const { account } = useWeb3React()
-  const { login, logout } = useAuth()
+  const { currentLanguage, setLanguage } = useTranslation();
+  const { account } = useWeb3React();
+  const { login, logout } = useAuth();
 
   return (
     <NavbarContainer>
@@ -124,6 +128,8 @@ const NavBar = () => {
         <MenuContainter>
           <Token>
             <TextEllipsis>
+              <img src={Swap} style={{ width: "15px", padding: "8px" }} />
+
               <StyledLink href="https://swap.monopolon.io">
                 Swap MLON to MGM
               </StyledLink>
@@ -131,8 +137,13 @@ const NavBar = () => {
           </Token>
           <Token>
             <TextEllipsis>
+              <img
+                src={Marketplace}
+                style={{ width: "18px", padding: "5px" }}
+              />
+
               <StyledLink href="https://marketplace.monopolon.io">
-                MarketPlace
+                Marketplace
               </StyledLink>
             </TextEllipsis>
           </Token>
@@ -170,7 +181,7 @@ const NavBar = () => {
         </List>
       </Menu>
     </NavbarContainer>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

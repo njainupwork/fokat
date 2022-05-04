@@ -12,7 +12,8 @@ export const ModalHeader = styled.div<{ background?: string }>`
   font-family: "DM Sans", -apple-system, system-ui, -apple-system, Segoe UI,
     Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
     "Helvetica Neue", "Helvetica", sans-serif;
-  border-bottom: 1px solid rgba(248, 209, 47, 1);
+  // border-bottom: 1px solid rgba(248, 209, 47, 1);
+  border-bottom: 1px solid rgb(32,34,49);
   display: flex;
   padding: 12px 24px;
 `;
@@ -41,7 +42,9 @@ export const ModalCloseButton: React.FC<{
       onClick={onDismiss}
       aria-label="Close the dialog"
     >
-      <CloseIcon color=" rgba(248, 209, 47, 1)" />
+      {/* <CloseIcon color=" rgba(248, 209, 47, 1)" /> */}
+      <CloseIcon color=" #fff" />
+
     </IconButton>
   );
 };
@@ -61,7 +64,10 @@ export const ModalContainer = styled(Box)<{ minWidth: string }>`
   background: #161522;
   box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1),
     0px 1px 1px rgba(0, 0, 0, 0.05);
-  border: 1px solid #feef03;
+  // border: 1px solid #feef03;
+  border: 1px solid rgb(32,34,49/1);
+
+
   border-radius: 22px;
   width: 100%;
   z-index: ${({ theme }) => theme.zIndices.modal};
