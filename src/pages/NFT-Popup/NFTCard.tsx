@@ -81,6 +81,7 @@ const Frame = styled.div`
   margin: auto;
   text-align: center;
   // margin-top: 1.5rem;
+  padding: 5px;
 `;
 const Text1 = styled.div`
   color: white;
