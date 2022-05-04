@@ -59,13 +59,14 @@ const shine = keyframes`
 }
 `;
 const NFT = styled.div`
-  border: 11px solid #1b202b;
+  border: 1px solid #1b202b;
   margin: 1rem;
   background: #1b202b;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  padding: 0.6rem;
 
   &:before {
     opacity: 0;
@@ -148,31 +149,6 @@ const ContentWrapper = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 10px;
-
-  &:before {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: -75%;
-    z-index: 2;
-    display: hidden;
-    content: '';
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.25) 100%
-    );
-    -webkit-transform: skewX(-25deg);
-    transform: skewX(-25deg);
-  }
-  &:before {
-    opacity: 1;
-    -webkit-animation: shine 2s infinite;
-    animation: ${shine} 2s infinite;
-    /* delay: 1s; */
-  }
 `;
 const Row = styled.div`
   width: auto;
