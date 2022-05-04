@@ -114,6 +114,7 @@ const Frame = styled.div`
   margin: auto;
   text-align: center;
   // margin-top: 1.5rem;
+  padding: 5px;
 `;
 const Text1 = styled.div`
   color: white;
@@ -282,6 +283,7 @@ const NFTCard: React.FC = () => {
       </Container>
     );
   }
+  console.log('tokens.length', tokens);
   if (!tokens || !tokens.length) {
     return (
       <Container>

@@ -8,7 +8,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-style svg {
+  fill: #fff;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

@@ -24,7 +24,7 @@ export default function DiceRoll1({ ...props }) {
   const { nodes, materials, animations } = useGLTF(`assets/dices/DiceRoll${props.number}.gltf`)
   console.log('materials', materials)
   const { actions } = useAnimations(animations, group)
-  const scale = .8;
+  const scale = .2;
   return (
     <group ref={group} {...props} dispose={null} scale={new Vector3(scale, scale, scale)}>
       <group>

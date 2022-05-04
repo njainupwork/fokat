@@ -49,8 +49,8 @@ const Scene = (props) => {
       <pointLight intensity={10} position={[0, 2, -1]} distance={10} />
       <Plane dispatch={props.dispatch} />
       {/* <LazerPerson/> */}
-      <DiceRoll dice={1} number={dice1} position={[0, 0, 2]} rand={rand} />
-      <DiceRoll dice={1} number={dice2} position={[0, 0, -1]} rand={rand} />
+      <DiceRoll dice={1} number={dice1} position={[0, 0, .5]} rand={rand} />
+      <DiceRoll dice={1} number={dice2} position={[0, 0, -.5]} rand={rand} />
       {/* <DiceRoll1_1 dice={2} position={[0, 0, 2]} /> */}
       {/* <DiceRoll dice={2} position={[0, -0, 0]} /> */}
       {/* <Dice2 /> */}

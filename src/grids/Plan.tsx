@@ -59,7 +59,7 @@ export default function Plane(props) {
 
     <mesh
       position={[0, 0, 0]}
-      scale={[0.5, 0.5, 0.5]}
+      scale={[0.1, 0.1, 0.1]}
       rotation={[Math.PI / 2, 0, angle]}
     >
       {/*
