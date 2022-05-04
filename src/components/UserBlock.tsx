@@ -34,6 +34,7 @@ const UserBlock: React.FC<Props> = ({ account, login, logout }: Props) => {
         </Button>
       ) : (
         <Button
+        style={{background: '#2b7fa0'}}
           scale="sm"
           variant="primary"
           onClick={() => {
