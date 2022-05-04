@@ -66,6 +66,52 @@ const MenuBar = styled.div`
   }
 `
 
+const MenuOptionContainter = styled.div`
+  background: rgb(32, 34, 49);
+  text-align: center;
+  position: absolute;
+  color: white;
+  z-index: 999;
+  display: none;
+  right: 10px;
+  top: 30px;
+  border-radius: 10px;
+  padding: 20px 5px;
+`
+
+const MenuContainter = styled.div`
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  padding: 20px 5px;
+  display: flex;
+  @media (max-width: 769px) {
+    display: none;
+  }
+`
+
+const Token = styled.div`
+  padding: 5px;
+  border-radius: 5px;
+  width: 150px;
+  column-gap: 5px;
+  color: #1fc7d4;
+  display: flex;
+  justify-content: center;
+  columngap: 5px;
+`
+const TextEllipsis = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const StyledLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+`
+
 const NavBar = () => {
   const { currentLanguage, setLanguage } = useTranslation()
   const { account } = useWeb3React()
@@ -75,6 +121,22 @@ const NavBar = () => {
     <NavbarContainer>
       <Menu>
         <Logo src="/images/newMonopolonLogo.png" />
+        <MenuContainter>
+          <Token>
+            <TextEllipsis>
+              <StyledLink href="https://swap.monopolon.io">
+                Swap MLON to MGM
+              </StyledLink>
+            </TextEllipsis>
+          </Token>
+          <Token>
+            <TextEllipsis>
+              <StyledLink href="https://marketplace.monopolon.io">
+                MarketPlace
+              </StyledLink>
+            </TextEllipsis>
+          </Token>
+        </MenuContainter>
         <List>
           <LangSelector
             color="white"
@@ -84,8 +146,25 @@ const NavBar = () => {
             setLang={setLanguage}
             flagUrl={currentLanguage.flag}
           />
+
           <UserBlock account={account} login={login} logout={logout} />
           <MenuBar>
+            <MenuOptionContainter>
+              <Token>
+                <TextEllipsis>
+                  <StyledLink href="https://swap.monopolon.io">
+                    Swap MLON to MGM
+                  </StyledLink>
+                </TextEllipsis>
+              </Token>
+              <Token>
+                <TextEllipsis>
+                  <StyledLink href="https://marketplace.monopolon.io">
+                    MarketPlace
+                  </StyledLink>
+                </TextEllipsis>
+              </Token>
+            </MenuOptionContainter>
             <MenuOutlined style={{ fontSize: "150%" }} className="menuicon" />
           </MenuBar>
         </List>
