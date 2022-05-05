@@ -209,15 +209,20 @@ const NFTCard: React.FC = () => {
               json
             );
             const data = json.data[0];
-            console.log("🚀 ~ file: NFTCard.tsx ~ line 212 ~ .map ~ data", data)
+            console.log(
+              "🚀 ~ file: NFTCard.tsx ~ line 212 ~ .map ~ data",
+              data
+            );
             const tokenData = data.token;
-            console.log("🚀 ~ file: NFTCard.tsx ~ line 213 ~ .map ~ tokenData", tokenData)
+            console.log(
+              "🚀 ~ file: NFTCard.tsx ~ line 213 ~ .map ~ tokenData",
+              tokenData
+            );
 
-            
             return {
-            image: token.uri,
-            id: token,
-          };
+              image: token.uri,
+              id: token,
+            };
           } catch (e) {
             console.log(
               "🚀 ~ file: NFTCard.tsx ~ line 203 ~ tokens=tokens.filter ~ e",

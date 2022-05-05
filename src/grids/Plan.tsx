@@ -15,6 +15,9 @@ import Item from "grids/Item";
 import plots from "plots";
 import { DoubleSide } from "three";
 import AnimationLaser from "./../AnimationLaser";
+import { useRef } from "react";
+import { useLoader } from "react-three-fiber";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 const OsakaComponents = {
   Osaka_p1: Osaka_p1,
@@ -30,7 +33,12 @@ const OsakaComponents = {
   Beijing5: Beijing5,
 };
 export default function Plane(props) {
+ let geomRef = useRef<any>();
   const dispatch = props.dispatch;
+  const background = useLoader(
+    TextureLoader,
+    "assets/grid/Scifi_Hex_Wall_specular.jpg"
+  );
   const mouseOver = (event, k) => {
     console.log("mouseOver", event, k);
     dispatch({
@@ -67,7 +75,7 @@ export default function Plane(props) {
         In this case the shape is a flat plane
       */}
       <Stars />
-      {/* <circleBufferGeometry args={[50, 5]} attach="geometry" ref={geomRef} /> */}
+      
       {plots.map((plot, k) => {
         if (plot.hasOwnProperty('component')) {
           const Osaka = OsakaComponents[plot["component"]];
@@ -103,11 +111,9 @@ export default function Plane(props) {
         The material gives a mesh its texture or look.
         In this case, it is just a uniform green
       */}
-      <meshBasicMaterial
-        attach="material"
-    color="black"
-    opacity={0.5}
-      />
+      {/* <circleBufferGeometry args={[51, 5]} attach="geometry" /> */}
+      <circleBufferGeometry args={[51, 5]} attach="geometry" />
+      <meshBasicMaterial side={DoubleSide} opacity={0.5} wireframe={false} map={background}/>
     </mesh>
   );
 }
