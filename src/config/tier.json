@@ -775,5 +775,18 @@
         "name": "rare1.png",
         "tier": 1
     },
-    "219": {"name": "mythic.jpg","tier":4}
+    "219": {"name": "mythic.jpg","tier":4},
+    
+    "437": {"name": "epic1.jpg","tier":1},
+    "438": {"name": "epic1.jpg","tier":1},
+    "439": {"name": "epic1.jpg","tier":1},
+    "432": {"name": "epic1.jpg","tier":1},
+    "431": {"name": "epic1.jpg","tier":1},
+    "430": {"name": "epic1.jpg","tier":1},
+    "426": {"name": "epic1.jpg","tier":1},
+    "423": {"name": "epic1.jpg","tier":1},
+    "418": {"name": "epic1.jpg","tier":1},
+    "429": {"name": "epic1.jpg","tier":1},
+    "425": {"name": "epic1.jpg","tier":1},
+    "428": {"name": "epic1.jpg","tier":1}
 }
