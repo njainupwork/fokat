@@ -776,7 +776,7 @@
     "tier": 1
   },
   "219": { "name": "mythic.jpg", "tier": 4 },
-
+  "421": { "name": "epic4.png", "tier": 2 },
   "437": { "name": "epic1.png", "tier": 2 },
   "438": { "name": "epic1.png", "tier": 2 },
   "439": { "name": "epic1.png", "tier": 2 },
@@ -789,5 +789,6 @@
   "429": { "name": "epic2.png", "tier": 2 },
   "425": { "name": "epic3.png", "tier": 2 },
   "428": { "name": "epic1.png", "tier": 2 },
-  "424": { "name": "epic2.png", "tier": 2 }
+  "424": { "name": "epic2.png", "tier": 2 },
+  "422": { "name": "epic5.png", "tier": 2 }
 }
