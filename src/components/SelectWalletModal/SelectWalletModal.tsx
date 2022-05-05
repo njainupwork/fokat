@@ -32,7 +32,7 @@ const Modal = styled(CustomModal)`
   text-align: left;
   vertical-align: bottom;
   background-color: rgb(22 21 34/1);
-  border-color: rgb(32 34 49/1);
+  // border-color: rgb(32 34 49/1);
   border-width: 1px;
   border-radius: 0.75rem;
   overflow: hidden;
