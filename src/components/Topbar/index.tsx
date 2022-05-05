@@ -12,6 +12,14 @@ import useAuth from "hooks/useAuth";
 import UserBlock from "components/UserBlock";
 import { languageList } from "config/localization/languages";
 import { useTranslation } from "contexts/Localization";
+import {
+  Container,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Offcanvas,
+} from "react-bootstrap";
+import "./style.css";
 import Swap from "../../assets/swap.svg";
 import Marketplace from "../../assets/marketplace.svg";
 
@@ -116,39 +124,136 @@ const StyledLink = styled.a`
   font-size: 12px;
 `;
 
+const RightSide = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+`;
+const NavLinksWrapper = styled.div`
+  display: flex;
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+`;
+
 const NavBar = () => {
   const { currentLanguage, setLanguage } = useTranslation();
   const { account } = useWeb3React();
   const { login, logout } = useAuth();
 
   return (
-    <NavbarContainer>
-      <Menu>
-        <Logo src="/images/newMonopolonLogo.png" />
-        <MenuContainter>
-          <Token>
-            <TextEllipsis>
-              <img src={Swap} style={{ width: "15px", padding: "8px" }} />
+    // <NavbarContainer>
+    //   <Menu>
+    //     <Logo src="/images/newMonopolonLogo.png" />
+    // <MenuContainter>
+    //   <Token>
+    //     <TextEllipsis>
+    //       <img src={Swap} style={{ width: "15px", padding: "8px" }} />
 
-              <StyledLink href="https://swap.monopolon.io">
-                Swap MLON to MGM
-              </StyledLink>
-            </TextEllipsis>
-          </Token>
-          <Token>
-            <TextEllipsis>
-              <img
-                src={Marketplace}
-                style={{ width: "18px", padding: "5px" }}
-              />
+    //       <StyledLink href="https://swap.monopolon.io">
+    //         Swap MLON to MGM
+    //       </StyledLink>
+    //     </TextEllipsis>
+    //   </Token>
+    //   <Token>
+    //     <TextEllipsis>
+    //       <img
+    //         src={Marketplace}
+    //         style={{ width: "18px", padding: "5px" }}
+    //       />
 
-              <StyledLink href="https://marketplace.monopolon.io">
-                Marketplace
-              </StyledLink>
-            </TextEllipsis>
-          </Token>
-        </MenuContainter>
-        <List>
+    //       <StyledLink href="https://marketplace.monopolon.io">
+    //         Marketplace
+    //       </StyledLink>
+    //     </TextEllipsis>
+    //   </Token>
+    // </MenuContainter>
+    //     <List>
+    //       <LangSelector
+    //         color="white"
+    //         position="bottom"
+    //         currentLang={currentLanguage.code}
+    //         langs={languageList}
+    //         setLang={setLanguage}
+    //         flagUrl={currentLanguage.flag}
+    //       />
+
+    //       <UserBlock account={account} login={login} logout={logout} />
+    //       <MenuBar>
+    //         <MenuOptionContainter>
+    //           <Token>
+    //             <TextEllipsis>
+    //               <StyledLink href="https://swap.monopolon.io">
+    //                 Swap MLON to MGM
+    //               </StyledLink>
+    //             </TextEllipsis>
+    //           </Token>
+    //           <Token>
+    //             <TextEllipsis>
+    //               <StyledLink href="https://marketplace.monopolon.io">
+    //                 MarketPlace
+    //               </StyledLink>
+    //             </TextEllipsis>
+    //           </Token>
+    //         </MenuOptionContainter>
+    //         <MenuOutlined style={{ fontSize: "150%" }} className="menuicon" />
+    //       </MenuBar>
+    //     </List>
+    //   </Menu>
+    // </NavbarContainer>
+    <Navbar className="Nav-sections" expand="lg">
+      <Container fluid>
+        <Navbar.Brand href="#">
+          <Logo src="/images/newMonopolonLogo.png" />
+        </Navbar.Brand>
+        <NavLinksWrapper>
+          {/* <Nav.Link
+            href="https://swap.monopolon.io"
+            id=""
+            className="linkheader"
+          >
+            <img src={Swap} style={{ width: "15px", padding: "8px" }} />
+            <StyledLink href="https://swap.monopolon.io">
+              Swap MLON to MGM
+            </StyledLink>
+          </Nav.Link>
+          <Nav.Link
+            href="https://marketplace.monopolon.io"
+            id=""
+            className="linkheader"
+          >
+            <img src={Marketplace} style={{ width: "18px", padding: "5px" }} />
+            <StyledLink href="https://marketplace.monopolon.io">
+              Marketplace
+            </StyledLink>
+          </Nav.Link> */}
+          <MenuContainter>
+            <Token>
+              <TextEllipsis>
+                <img src={Swap} style={{ width: "15px", marginRight: "8px" }} />
+                <StyledLink href="https://swap.monopolon.io">
+                  Swap MLON to MGM
+                </StyledLink>
+              </TextEllipsis>
+            </Token>
+            <Token>
+              <TextEllipsis>
+                <img
+                  src={Marketplace}
+                  style={{ width: "18px", marginRight: "8px" }}
+                />
+
+                <StyledLink href="https://marketplace.monopolon.io">
+                  Marketplace
+                </StyledLink>
+              </TextEllipsis>
+            </Token>
+          </MenuContainter>
+        </NavLinksWrapper>
+        <RightSide>
           <LangSelector
             color="white"
             position="bottom"
@@ -157,30 +262,64 @@ const NavBar = () => {
             setLang={setLanguage}
             flagUrl={currentLanguage.flag}
           />
-
           <UserBlock account={account} login={login} logout={logout} />
-          <MenuBar>
-            <MenuOptionContainter>
-              <Token>
-                <TextEllipsis>
+        </RightSide>
+        <Navbar.Toggle aria-controls="offcanvasNavbar" />
+        <Navbar.Offcanvas
+          className="offcanvas-section"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+          placement="end"
+        >
+          <Offcanvas.Header></Offcanvas.Header>
+          <Offcanvas.Body>
+            <Nav className="justify-content-end flex-grow-1 pe-3 .navbar-nav">
+              <div className="language-btn">
+                <LangSelector
+                  color="white"
+                  position="bottom"
+                  currentLang={currentLanguage.code}
+                  langs={languageList}
+                  setLang={setLanguage}
+                  flagUrl={currentLanguage.flag}
+                />
+              </div>
+              <div>
+                <Nav.Link
+                  href="https://swap.monopolon.io"
+                  id=""
+                  className="linkheader"
+                >
+                  <img
+                    src={Swap}
+                    style={{ width: "15px", marginRight: "8px" }}
+                  />
                   <StyledLink href="https://swap.monopolon.io">
                     Swap MLON to MGM
                   </StyledLink>
-                </TextEllipsis>
-              </Token>
-              <Token>
-                <TextEllipsis>
+                </Nav.Link>
+                <Nav.Link
+                  href="https://marketplace.monopolon.io"
+                  id=""
+                  className="linkheader"
+                >
+                  <img
+                    src={Marketplace}
+                    style={{ width: "18px", marginRight: "8px" }}
+                  />
+
                   <StyledLink href="https://marketplace.monopolon.io">
-                    MarketPlace
+                    Marketplace
                   </StyledLink>
-                </TextEllipsis>
-              </Token>
-            </MenuOptionContainter>
-            <MenuOutlined style={{ fontSize: "150%" }} className="menuicon" />
-          </MenuBar>
-        </List>
-      </Menu>
-    </NavbarContainer>
+                </Nav.Link>
+              </div>
+              <UserBlock account={account} login={login} logout={logout} />
+              {/* <NavDropdown.Divider /> */}
+            </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
   );
 };
 
