@@ -87,6 +87,7 @@
   min-width: 100vw;
   min-height: 100vh;
   background-color: #0d0415;
+  display: grid;
 }
 
 .buttons {

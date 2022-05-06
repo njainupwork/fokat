@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Stats } from "@react-three/drei";
+import { OrbitControls, Stats } from "@react-three/drei";
 import { Suspense, useRef, useMemo } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Html, useProgress } from "@react-three/drei";
@@ -74,7 +74,7 @@ const Grid: React.FC = () => {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "100%",
         width: "100vw",
       }}
       className="grid-wrapper"
@@ -86,7 +86,7 @@ const Grid: React.FC = () => {
           </Suspense>
         </AppContext.Provider>
         {/* <Stats /> */}
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         <ambientLight />
         <pointLight position={[0, 3, 0]} />
       </Canvas>

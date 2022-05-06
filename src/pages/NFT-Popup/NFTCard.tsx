@@ -14,19 +14,51 @@ const Container = styled.div`
   height: 100%;
   border-radius: 10px;
   margin-top: 30px;
+  width: 90%;
+  margin:10px auto;
+  
 `;
 
 const Title = styled.div`
   color: white;
   font-family: Open Sans;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 24px;
   width: 100%;
   text-align: center;
 
   @media (max-width: 425px) {
     display: block;
   }
+  @media (max-width: 768px) {
+    display: block;
+    font-size: 18px;
+  }
+  
+`;
+
+
+const TitlePurchase = styled.div`
+  color: white;
+  font-family: Open Sans;
+  font-weight: 700;
+  font-size: 24px;
+  width: 90%;
+  text-align: center;
+
+  @media (max-width: 425px) {
+    display: block;
+  }
+  @media (max-width: 768px) {
+    display: block;
+    font-size: 18px;
+  }
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 `;
 
 const CardContainer = styled.div`
@@ -270,12 +302,12 @@ const NFTCard: React.FC = () => {
   if (!tokens || !tokens.length) {
     return (
       <Container>
-        <Title>
+        <TitlePurchase>
           {t("You do not have any NFT Tokens. Please Purchase at")}{" "}
           <a target={"_blank"} href="https://marketplace.monopolon.io/">
             https://marketplace.monopolon.io/
           </a>
-        </Title>
+        </TitlePurchase>
       </Container>
     );
   }

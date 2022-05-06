@@ -38,8 +38,8 @@ function Sky() {
   // Animates water
   // (water.material as any).uniforms["time"].value += 1.0 / 60.0;
   // });
-  // let obj = useLoader(TextureLoader, cameraType == "character" ? "assets/art_bg.jpg" :"assets/water_ocean_nature_waves_foam_1920x1080.jpg");;
-  // scene.background = obj;
+  let obj = useLoader(TextureLoader, cameraType == "character" ? "assets/art_bg.jpg" :"assets/water_ocean_nature_waves_foam_1920x1080.jpg");;
+  scene.background = obj;
   return null;
 }
 
