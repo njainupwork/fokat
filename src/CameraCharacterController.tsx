@@ -73,7 +73,6 @@ function CameraCharacterController({ turn, prevLookAt, position, prevTurn }) {
     }
     // return;
     if (ref.current !== null) {
-      console.log("positionpositionposition", position, prevLookAt);
       let n = position;
 
       // ref.current.lookAt(n);

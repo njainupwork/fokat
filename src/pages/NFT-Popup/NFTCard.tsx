@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import useToast from "hooks/useToast";
 import tiers from "../../config/tier.json";
 import { useTranslation } from "contexts/Localization";
+import axios from "axios";
 const Container = styled.div`
   background: inherit;
   border: none;
@@ -179,12 +180,17 @@ const NFTCard: React.FC = () => {
     setLoading(true);
     //@todo fix cors issue
     getUserTokens().then((tokens) => {
-        console.log("🚀 ~ file: NFTCard.tsx ~ line 181 ~ getUserTokens ~ tokens", tokens)
-        setLoading(false);
-        if(!tokens){
-          return;
-        }
-        tokens = tokens.filter((token) => tiers[parseInt(token)]).map(async (token) => {
+      console.log(
+        "🚀 ~ file: NFTCard.tsx ~ line 181 ~ getUserTokens ~ tokens",
+        tokens
+      );
+      setLoading(false);
+      if (!tokens) {
+        return;
+      }
+      tokens = tokens
+        .filter((token) => tiers[parseInt(token)])
+        .map(async (token) => {
           console.log(
             "🚀 ~ file: NFTCard.tsx ~ line 192 ~ tokens=tokens.map ~ token",
             token
@@ -194,28 +200,59 @@ const NFTCard: React.FC = () => {
             "🚀 ~ file: NFTCard.tsx ~ line 190 ~ tokens=tokens.map ~ filename",
             filename
           );
+          try {
+            const json = await axios.get(
+              `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
+            );
+            console.log(
+              "🚀 ~ file: NFTCard.tsx ~ line 199 ~ tokens=tokens.filter ~ json",
+              json
+            );
+            const data = json.data[0];
+            console.log(
+              "🚀 ~ file: NFTCard.tsx ~ line 212 ~ .map ~ data",
+              data
+            );
+            const tokenData = data.token;
+            console.log(
+              "🚀 ~ file: NFTCard.tsx ~ line 213 ~ .map ~ tokenData",
+              tokenData
+            );
 
+            return {
+              image: token.uri,
+              id: token,
+            };
+          } catch (e) {
+            console.log(
+              "🚀 ~ file: NFTCard.tsx ~ line 203 ~ tokens=tokens.filter ~ e",
+              e
+            );
+          }
           return {
             image: await import(`../../assets/characters/${filename}`),
             id: token,
           };
         });
 
-        console.log("🚀 ~ file: NFTCard.tsx ~ line 204 ~ Promise.all ~ tokens", tokens)
-        Promise.all(tokens).then((results) => {
-          console.log(
-            "🚀 ~ file: NFTCard.tsx ~ line 201 ~ Promise.all ~ results",
-            results
-          );
-          tokens = results;
-          const chunkSize = 3;
-          const chunks = [];
-          for (let i = 0; i < tokens.length; i += chunkSize) {
-            chunks.push(tokens.slice(i, i + chunkSize));
-          }
-          setTokens(chunks);
-        });
+      console.log(
+        "🚀 ~ file: NFTCard.tsx ~ line 204 ~ Promise.all ~ tokens",
+        tokens
+      );
+      Promise.all(tokens).then((results) => {
+        console.log(
+          "🚀 ~ file: NFTCard.tsx ~ line 201 ~ Promise.all ~ results",
+          results
+        );
+        tokens = results;
+        const chunkSize = 3;
+        const chunks = [];
+        for (let i = 0; i < tokens.length; i += chunkSize) {
+          chunks.push(tokens.slice(i, i + chunkSize));
+        }
+        setTokens(chunks);
       });
+    });
   }, [account]);
 
   const selectCharacter = (token: number) => {
@@ -245,7 +282,7 @@ const NFTCard: React.FC = () => {
       </Container>
     );
   }
-  console.log('tokens.length',tokens)
+  console.log("tokens.length", tokens);
   if (!tokens || !tokens.length) {
     return (
       <Container>
