@@ -26,7 +26,6 @@ const Scene = (props) => {
   const { dice } = context;
   const { rolls } = dice;
 
-  console.log("rolls_rolls", rolls, context);
   //set rand because I realised if the dice rolls and has same as old value it does not animate
   const [rand, setRand] = useState(Math.random() * 100);
   useEffect(() => {
@@ -66,7 +65,6 @@ interface SelectorProps {
 }
 
 function selector(state: State): SelectorProps {
-  console.log("state_state___", state);
   return state.game;
 }
 const Grid: React.FC = () => {

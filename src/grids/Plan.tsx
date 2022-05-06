@@ -66,7 +66,7 @@ export default function Plane(props) {
     // in the X-Y plane, where Y is the up direction
 
     <mesh
-      position={[0, 0, 0]}
+      position={[0, 0.01, 0]}
       scale={[0.1, 0.1, 0.1]}
       rotation={[Math.PI / 2, 0, angle]}
     >
