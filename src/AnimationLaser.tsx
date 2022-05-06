@@ -235,8 +235,9 @@ function AnimationLaser() {
         endPosition: plot,
         turn: turn,
         callback: () => {
+          setTurn(turn + 1);
           setTimeout(() => {
-            setTurn(turn + 1);
+            // setTurn(turn + 1);
           }, 600);
         },
       });

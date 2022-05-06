@@ -32,7 +32,7 @@ function Sky() {
   const context = React.useContext(AppContext);
   const { camera, gridPosition } = context;
   const { cameraType } = camera;
-  const water = buildWater(scene);
+  // const water = buildWater(scene);
 
   // useFrame((state) => {
   // Animates water
