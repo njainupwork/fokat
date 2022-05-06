@@ -91,9 +91,14 @@ const NFT = styled.div`
     animation: ${shine} 2s infinite;
     /* delay: 1s; */
   }
+
+   @media (max-width: 768px) {
+    width: 366px;
+    margin: 0.4rem;
+  }
 `;
 const Content = styled.div`
-  width: 380px;
+  width: auto;
   height: 100%;
   color: white;
 `;
@@ -125,14 +130,14 @@ const Text2 = styled.div`
 `;
 const Box = styled.div`
   color:white;
-  margin-top: 30px;
+  margin-top: 15px;
   @media (max-width: 425px){
     margin-top: 35px;
 }
 }
 `;
 const ContentWrapper = styled.div`
-  background: 0d0415;
+  background: #0d0415;
   height: 188px;
   display: flex;
   align-items: center;
