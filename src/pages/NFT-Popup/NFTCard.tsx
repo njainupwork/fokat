@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
-import cross from "../../assets/cross.png";
-import cardimage from "../../assets/blue-wings.png";
-import { useWeb3React } from "@web3-react/core";
-import { useCharacter } from "hooks/useCharacter";
-import { useDispatch } from "react-redux";
-import useToast from "hooks/useToast";
-import tiers from "../../config/tier.json";
-import { useTranslation } from "contexts/Localization";
+import React, { useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { useWeb3React } from '@web3-react/core';
+import { useCharacter } from 'hooks/useCharacter';
+import { useDispatch } from 'react-redux';
+import useToast from 'hooks/useToast';
+import tiers from '../../config/tier.json';
+import { useTranslation } from 'contexts/Localization';
 import axios from "axios";
 const Container = styled.div`
   background: inherit;
@@ -17,12 +15,7 @@ const Container = styled.div`
   border-radius: 10px;
   margin-top: 30px;
 `;
-const CrossContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  background: white;
-  border-radius: 10px;
-`;
+
 const Title = styled.div`
   color: white;
   font-family: Open Sans;
@@ -46,27 +39,21 @@ const CardContainer = styled.div`
   display: grid;
 `;
 
-const CardRow = styled.div`
-  display: block;
-  justify-content: center;
-  margin-top: 6rem;
 
-  display: block;
-  flex-direction: column;
-`;
 const shine = keyframes`
 100% {
   left: 125%;
 }
 `;
 const NFT = styled.div`
-  border: 11px solid #1b202b;
+  border: 1px solid #1b202b;
   margin: 1rem;
   background: #1b202b;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  padding: 0.6rem;
   &:before {
     opacity: 0;
     position: absolute;
@@ -74,7 +61,7 @@ const NFT = styled.div`
     left: -75%;
     z-index: 2;
     display: hidden;
-    content: "";
+    content: '';
     width: 50%;
     height: 100%;
     background: linear-gradient(
@@ -91,11 +78,15 @@ const NFT = styled.div`
     animation: ${shine} 2s infinite;
     /* delay: 1s; */
   }
-
-   @media (max-width: 768px) {
-    width: 366px;
+  @media (max-width: 768px) {
+    // width: 366px;
     margin: 0.4rem;
   }
+  @media (max-width: 425px) {
+    margin: 0.3rem;
+  }
+  cursor: pointer;
+  // float: left;
 `;
 const Content = styled.div`
   width: auto;
@@ -144,30 +135,6 @@ const ContentWrapper = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 10px;
-  &:before {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: -75%;
-    z-index: 2;
-    display: hidden;
-    content: "";
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.25) 100%
-    );
-    -webkit-transform: skewX(-25deg);
-    transform: skewX(-25deg);
-  }
-  &:before {
-    opacity: 1;
-    -webkit-animation: shine 2s infinite;
-    animation: ${shine} 2s infinite;
-    /* delay: 1s; */
-  }
 `;
 const Row = styled.div`
   width: auto;
