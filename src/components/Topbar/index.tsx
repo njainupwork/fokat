@@ -47,8 +47,8 @@ const Logo = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 600px) {
-    width: 6em;
+  @media (max-width: 450px) {
+    width: 4em;
     height: auto;
   }
 `;
@@ -132,9 +132,9 @@ const RightSide = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: baseline;
-  @media screen and (max-width: 992px) {
-    display: none;
-  }
+  // @media screen and (max-width: 992px) {
+  //   display: none;
+  // }
 `;
 const NavLinksWrapper = styled.div`
   display: flex;
@@ -175,17 +175,17 @@ const NavBar = () => {
     //     </TextEllipsis>
     //   </Token>
     // </MenuContainter>
-    //     <List>
-    //       <LangSelector
-    //         color="white"
-    //         position="bottom"
-    //         currentLang={currentLanguage.code}
-    //         langs={languageList}
-    //         setLang={setLanguage}
-    //         flagUrl={currentLanguage.flag}
-    //       />
+    // <List>
+    //   <LangSelector
+    //     color="white"
+    //     position="bottom"
+    //     currentLang={currentLanguage.code}
+    //     langs={languageList}
+    //     setLang={setLanguage}
+    //     flagUrl={currentLanguage.flag}
+    //   />
 
-    //       <UserBlock account={account} login={login} logout={logout} />
+    //   <UserBlock account={account} login={login} logout={logout} />
     //       <MenuBar>
     //         <MenuOptionContainter>
     //           <Token>
@@ -209,7 +209,8 @@ const NavBar = () => {
     //   </Menu>
     // </NavbarContainer>
     <Navbar className="Nav-sections" expand="lg">
-      <Container fluid>
+      {/* <Container fluid> */}
+      <div className="nav-headersection">
         <Navbar.Brand href="#">
           <Logo src="/images/newMonopolonLogo.png" />
         </Navbar.Brand>
@@ -257,7 +258,7 @@ const NavBar = () => {
             </Token>
           </MenuContainter>
         </NavLinksWrapper>
-        <RightSide>
+        {/* <RightSide>
           <LangSelector
             color="white"
             position="bottom"
@@ -267,7 +268,19 @@ const NavBar = () => {
             flagUrl={currentLanguage.flag}
           />
           <UserBlock account={account} login={login} logout={logout} />
-        </RightSide>
+        </RightSide> */}
+        <List>
+          <LangSelector
+            color="white"
+            position="bottom"
+            currentLang={currentLanguage.code}
+            langs={languageList}
+            setLang={setLanguage}
+            flagUrl={currentLanguage.flag}
+          />
+
+          <UserBlock account={account} login={login} logout={logout} />
+        </List>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Offcanvas
           className="offcanvas-section"
@@ -275,10 +288,10 @@ const NavBar = () => {
           aria-labelledby="offcanvasNavbarLabel"
           placement="end"
         >
-          <Offcanvas.Header></Offcanvas.Header>
+          <Offcanvas.Header closeButton></Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3 .navbar-nav">
-              <div className="language-btn">
+              {/* <div className="language-btn">
                 <LangSelector
                   color="white"
                   position="bottom"
@@ -287,7 +300,7 @@ const NavBar = () => {
                   setLang={setLanguage}
                   flagUrl={currentLanguage.flag}
                 />
-              </div>
+              </div> */}
               <div>
                 <Nav.Link
                   href="https://swap.monopolon.io"
@@ -317,12 +330,13 @@ const NavBar = () => {
                   </StyledLink>
                 </Nav.Link>
               </div>
-              <UserBlock account={account} login={login} logout={logout} />
+              {/* <UserBlock account={account} login={login} logout={logout} /> */}
               {/* <NavDropdown.Divider /> */}
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
-      </Container>
+        {/* </Container> */}
+      </div>
     </Navbar>
   );
 };
