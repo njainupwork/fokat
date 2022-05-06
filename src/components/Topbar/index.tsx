@@ -42,14 +42,14 @@ const NavbarContainer = styled.div`
 
 const Logo = styled.img`
   height: 6em;
-  width: 8em !important;
+  width: 8em;
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   @media (max-width: 600px) {
-    width: 7em;
-    height: 5em;
+    width: 6em;
+    height: auto;
   }
 `;
 
