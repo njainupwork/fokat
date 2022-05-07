@@ -5,6 +5,7 @@ import { useThree, useFrame } from "react-three-fiber";
 import * as THREE from "three";
 import CameraControls from "camera-controls";
 import AppContext from "appContext";
+import { OrbitControls } from "@react-three/drei";
 
 function CameraGridController({ turn, prevLookAt, position, prevTurn }) {
   const context = React.useContext(AppContext);
@@ -91,8 +92,9 @@ function CameraGridController({ turn, prevLookAt, position, prevTurn }) {
   });
 
   var width = window.innerWidth;
-  var height = window.innerHeight;
-  const aspect = width / height;
+  var height = window.innerHeight - 163;
+  const aspect = width / height; 
+  // return <OrbitControls minPolarAngle={Math.PI /5} maxPolarAngle={Math.PI/2} target={[0,0,0]}  position={vectorPosition}/>
   return (
     <perspectiveCamera
       rotation={[0, 0, 0]}

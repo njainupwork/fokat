@@ -313,7 +313,7 @@ const TopButtons: React.FC = () => {
   }
   return (
     <>
-      {hover != -1 ? (
+      {hover != -1 && rewards ? (
         <HoverDiv>
           <h3>{t("Grid Info")}</h3>
           <p>

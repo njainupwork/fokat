@@ -86,7 +86,7 @@ const Grid: React.FC = () => {
           </Suspense>
         </AppContext.Provider>
         {/* <Stats /> */}
-        <OrbitControls />
+        {/* <OrbitControls minPolarAngle={Math.PI /2} maxPolarAngle={Math.PI} target={[0,0,0]}/> */}
         <ambientLight />
         <pointLight position={[0, 3, 0]} />
       </Canvas>

@@ -74,7 +74,7 @@ export default function Plane(props) {
         The thing that gives the mesh its shape
         In this case the shape is a flat plane
       */}
-      <Stars />
+      {/* <Stars /> */}
       
       {plots.map((plot, k) => {
         if (plot.hasOwnProperty('component')) {
