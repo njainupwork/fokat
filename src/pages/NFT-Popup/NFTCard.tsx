@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { useWeb3React } from '@web3-react/core';
-import { useCharacter } from 'hooks/useCharacter';
-import { useDispatch } from 'react-redux';
-import useToast from 'hooks/useToast';
-import tiers from '../../config/tier.json';
-import { useTranslation } from 'contexts/Localization';
+import React, { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import { useWeb3React } from "@web3-react/core";
+import { useCharacter } from "hooks/useCharacter";
+import { useDispatch } from "react-redux";
+import useToast from "hooks/useToast";
+import { useTranslation } from "contexts/Localization";
 import axios from "axios";
 const Container = styled.div`
   background: inherit;
@@ -15,8 +14,7 @@ const Container = styled.div`
   border-radius: 10px;
   margin-top: 30px;
   width: 90%;
-  margin:10px auto;
-  
+  margin: 10px auto;
 `;
 
 const Title = styled.div`
@@ -29,14 +27,13 @@ const Title = styled.div`
 
   @media (max-width: 425px) {
     display: block;
+    font-size: 25px;
   }
   @media (max-width: 768px) {
     display: block;
     font-size: 18px;
   }
-  
 `;
-
 
 const TitlePurchase = styled.div`
   color: white;
@@ -71,7 +68,6 @@ const CardContainer = styled.div`
   display: grid;
 `;
 
-
 const shine = keyframes`
 100% {
   left: 125%;
@@ -93,7 +89,7 @@ const NFT = styled.div`
     left: -75%;
     z-index: 2;
     display: hidden;
-    content: '';
+    content: "";
     width: 50%;
     height: 100%;
     background: linear-gradient(
@@ -230,34 +226,35 @@ const NFTCard: React.FC = () => {
     }
     //@todo fix cors issue
     getUserTokens().then((tokens) => {
-      
+      console.log(
+        "🚀 ~ file: NFTCard.tsx ~ line 233 ~ getUserTokens ~ tokens",
+        tokens
+      );
+
       if (!tokens) {
         setLoading(false);
         return;
       }
-      tokens = tokens
-        .filter((token) => tiers[parseInt(token)])
-        .map(async (token) => {
-          const filename = tiers[parseInt(token)]["name"];
-          try {
-            const resp = await axios.get(
-              `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
-            );
-            const json = resp.data;
-            const data = json.data[0];
-            const tokenData = data.token;
+      tokens = tokens.map(async (token) => {
+        try {
+          const resp = await axios.get(
+            `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
+          );
+          const json = resp.data;
+          const data = json.data[0];
+          const tokenData = data.token;
 
-            return {
-              image: tokenData.ipfsUrl,
-              id: token,
-            };
-          } catch (e) {
-          }
           return {
-            image: await import(`../../assets/characters/${filename}`),
+            image: tokenData.ipfsUrl,
             id: token,
           };
-        });
+        } catch (e) {
+          console.log(
+            "🚀 ~ file: NFTCard.tsx ~ line 253 ~ tokens=tokens.map ~ e",
+            e
+          );
+        }
+      });
 
       Promise.all(tokens).then((results) => {
         tokens = results;
@@ -318,14 +315,13 @@ const NFTCard: React.FC = () => {
         <CardContainer>
           {!loading &&
             tokens &&
-            tokens.map((chunk) => {
+            tokens.map((chunk, i) => {
               return (
-                <Row>
-                  {chunk.map((token) => {
+                <Row key={i}>
+                  {chunk.map((token, j) => {
                     const img = token.image;
                     return (
-                      <>
-                        <NFT onClick={() => selectCharacter(token["id"])}>
+                      <NFT onClick={() => selectCharacter(token["id"])} key={j}>
                           <ContentWrapper>
                             <Content>
                               <Frame>
@@ -340,7 +336,6 @@ const NFTCard: React.FC = () => {
                             {/* <Text2>level</Text2> */}
                           </Box>
                         </NFT>
-                      </>
                     );
                   })}
                 </Row>
