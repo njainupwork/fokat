@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import cross from "../../assets/cross.png";
-import cardimage from "../../assets/blue-wings.png";
+import styled, { keyframes } from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 import { useCharacter } from "hooks/useCharacter";
 import { useDispatch } from "react-redux";
 import useToast from "hooks/useToast";
-import tiers from "../../config/tier.json";
 import { useTranslation } from "contexts/Localization";
 import axios from "axios";
 const Container = styled.div`
@@ -16,18 +13,15 @@ const Container = styled.div`
   height: 100%;
   border-radius: 10px;
   margin-top: 30px;
+  width: 90%;
+  margin: 10px auto;
 `;
-const CrossContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  background: white;
-  border-radius: 10px;
-`;
+
 const Title = styled.div`
   color: white;
   font-family: Open Sans;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 24px;
   width: 100%;
   text-align: center;
 
@@ -35,6 +29,33 @@ const Title = styled.div`
     display: block;
     font-size: 25px;
   }
+  @media (max-width: 768px) {
+    display: block;
+    font-size: 18px;
+  }
+`;
+
+const TitlePurchase = styled.div`
+  color: white;
+  font-family: Open Sans;
+  font-weight: 700;
+  font-size: 24px;
+  width: 90%;
+  text-align: center;
+
+  @media (max-width: 425px) {
+    display: block;
+  }
+  @media (max-width: 768px) {
+    display: block;
+    font-size: 18px;
+  }
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0 auto;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 `;
 
 const CardContainer = styled.div`
@@ -47,23 +68,46 @@ const CardContainer = styled.div`
   display: grid;
 `;
 
-const CardRow = styled.div`
-  display: block;
-  justify-content: center;
-  margin-top: 6rem;
-
-  display: block;
-  flex-direction: column;
+const shine = keyframes`
+100% {
+  left: 125%;
+}
 `;
 const NFT = styled.div`
-  border: 11px solid #1b202b;
-  width: 404px;
-  height: 335px;
+  border: 1px solid #1b202b;
   margin: 1rem;
   background: #1b202b;
   border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0.6rem;
+  &:before {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 2;
+    display: hidden;
+    content: "";
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+  }
+  &:before {
+    opacity: 1;
+    -webkit-animation: shine 2s infinite;
+    animation: ${shine} 2s infinite;
+    /* delay: 1s; */
+  }
   @media (max-width: 768px) {
-    width: 366px;
+    // width: 366px;
     margin: 0.4rem;
   }
   @media (max-width: 425px) {
@@ -73,7 +117,7 @@ const NFT = styled.div`
   // float: left;
 `;
 const Content = styled.div`
-  width: 380px;
+  width: auto;
   height: 100%;
   color: white;
 `;
@@ -105,18 +149,20 @@ const Text2 = styled.div`
 `;
 const Box = styled.div`
   color:white;
-  margin-top: 30px;
+  margin-top: 15px;
   @media (max-width: 425px){
     margin-top: 35px;
 }
 }
 `;
 const ContentWrapper = styled.div`
-  background: black;
+  background: #0d0415;
   height: 188px;
   display: flex;
   align-items: center;
   overflow: hidden;
+  position: relative;
+  border-radius: 10px;
 `;
 const Row = styled.div`
   width: auto;
@@ -167,7 +213,7 @@ const CharacterImg = styled.img`
 const NFTCard: React.FC = () => {
   const { account } = useWeb3React();
   const { getUserTokens, enterGame, approveNFT } = useCharacter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [tokens, setTokens] = useState(null);
   const { toastSuccess, toastError } = useToast();
   const { t, currentLanguage } = useTranslation();
@@ -176,75 +222,43 @@ const NFTCard: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!account) {
+      setLoading(false);
       return;
     }
     setLoading(true);
     //@todo fix cors issue
     getUserTokens().then((tokens) => {
       console.log(
-        "🚀 ~ file: NFTCard.tsx ~ line 181 ~ getUserTokens ~ tokens",
+        "🚀 ~ file: NFTCard.tsx ~ line 233 ~ getUserTokens ~ tokens",
         tokens
       );
-      setLoading(false);
+
       if (!tokens) {
+        setLoading(false);
         return;
       }
-      tokens = tokens
-        .filter((token) => tiers[parseInt(token)])
-        .map(async (token) => {
-          console.log(
-            "🚀 ~ file: NFTCard.tsx ~ line 192 ~ tokens=tokens.map ~ token",
-            token
+      tokens = tokens.map(async (token) => {
+        try {
+          const resp = await axios.get(
+            `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
           );
-          const filename = tiers[parseInt(token)]["name"];
-          console.log(
-            "🚀 ~ file: NFTCard.tsx ~ line 190 ~ tokens=tokens.map ~ filename",
-            filename
-          );
-          try {
-            const json = await axios.get(
-              `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
-            );
-            console.log(
-              "🚀 ~ file: NFTCard.tsx ~ line 199 ~ tokens=tokens.filter ~ json",
-              json
-            );
-            const data = json.data[0];
-            console.log(
-              "🚀 ~ file: NFTCard.tsx ~ line 212 ~ .map ~ data",
-              data
-            );
-            const tokenData = data.token;
-            console.log(
-              "🚀 ~ file: NFTCard.tsx ~ line 213 ~ .map ~ tokenData",
-              tokenData
-            );
+          const json = resp.data;
+          const data = json.data[0];
+          const tokenData = data.token;
 
-            return {
-              image: token.uri,
-              id: token,
-            };
-          } catch (e) {
-            console.log(
-              "🚀 ~ file: NFTCard.tsx ~ line 203 ~ tokens=tokens.filter ~ e",
-              e
-            );
-          }
           return {
-            image: await import(`../../assets/characters/${filename}`),
+            image: tokenData.ipfsUrl,
             id: token,
           };
-        });
+        } catch (e) {
+          console.log(
+            "🚀 ~ file: NFTCard.tsx ~ line 253 ~ tokens=tokens.map ~ e",
+            e
+          );
+        }
+      });
 
-      console.log(
-        "🚀 ~ file: NFTCard.tsx ~ line 204 ~ Promise.all ~ tokens",
-        tokens
-      );
       Promise.all(tokens).then((results) => {
-        console.log(
-          "🚀 ~ file: NFTCard.tsx ~ line 201 ~ Promise.all ~ results",
-          results
-        );
         tokens = results;
         const chunkSize = 3;
         const chunks = [];
@@ -252,6 +266,7 @@ const NFTCard: React.FC = () => {
           chunks.push(tokens.slice(i, i + chunkSize));
         }
         setTokens(chunks);
+        setLoading(false);
       });
     });
   }, [account]);
@@ -283,16 +298,15 @@ const NFTCard: React.FC = () => {
       </Container>
     );
   }
-  console.log("tokens.length", tokens);
   if (!tokens || !tokens.length) {
     return (
       <Container>
-        <Title>
+        <TitlePurchase>
           {t("You do not have any NFT Tokens. Please Purchase at")}{" "}
           <a target={"_blank"} href="https://marketplace.monopolon.io/">
             https://marketplace.monopolon.io/
           </a>
-        </Title>
+        </TitlePurchase>
       </Container>
     );
   }
@@ -303,18 +317,13 @@ const NFTCard: React.FC = () => {
         <CardContainer>
           {!loading &&
             tokens &&
-            tokens.map((chunk) => {
+            tokens.map((chunk, i) => {
               return (
-                <Row>
-                  {chunk.map((token) => {
-                    console.log(
-                      "🚀 ~ file: NFTCard.tsx ~ line 262 ~ {chunk.map ~ token",
-                      token
-                    );
-                    const img = token["image"]["default"];
+                <Row key={i}>
+                  {chunk.map((token, j) => {
+                    const img = token.image;
                     return (
-                      <>
-                        <NFT onClick={() => selectCharacter(token["id"])}>
+                      <NFT onClick={() => selectCharacter(token["id"])} key={j}>
                           <ContentWrapper>
                             <Content>
                               <Frame>
@@ -329,7 +338,6 @@ const NFTCard: React.FC = () => {
                             {/* <Text2>level</Text2> */}
                           </Box>
                         </NFT>
-                      </>
                     );
                   })}
                 </Row>

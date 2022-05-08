@@ -240,7 +240,10 @@ const TopButtons: React.FC = () => {
   }, [playing]);
   const prevAccount = usePrevious(account);
   useEffect(() => {
-    getAndDispatchPosition();
+
+    if(account){
+      getAndDispatchPosition();
+    }
   }, [account]);
   useEffect(() => {
     //if user switches account reset game

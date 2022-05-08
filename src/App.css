@@ -87,6 +87,7 @@
   min-width: 100vw;
   min-height: 100vh;
   background-color: #0d0415;
+  display: grid;
 }
 
 .buttons {
@@ -99,4 +100,6 @@
   background: #090b1f;
   background: radial-gradient(at 50% 70%, #200f20 40%, #090b1f 80%, #050523 100%);
 }
-
+.Nav-sections{
+  max-height: 140px !important;
+}

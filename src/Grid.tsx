@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Stats } from "@react-three/drei";
+import { OrbitControls, Stats } from "@react-three/drei";
 import { Suspense, useRef, useMemo } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Html, useProgress } from "@react-three/drei";
@@ -26,7 +26,6 @@ const Scene = (props) => {
   const { dice } = context;
   const { rolls } = dice;
 
-  console.log("rolls_rolls", rolls, context);
   //set rand because I realised if the dice rolls and has same as old value it does not animate
   const [rand, setRand] = useState(Math.random() * 100);
   useEffect(() => {
@@ -66,7 +65,6 @@ interface SelectorProps {
 }
 
 function selector(state: State): SelectorProps {
-  console.log("state_state___", state);
   return state.game;
 }
 const Grid: React.FC = () => {
@@ -76,7 +74,7 @@ const Grid: React.FC = () => {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "100%",
         width: "100vw",
       }}
       className="grid-wrapper"
@@ -88,7 +86,7 @@ const Grid: React.FC = () => {
           </Suspense>
         </AppContext.Provider>
         {/* <Stats /> */}
-        {/* <OrbitControls /> */}
+        {/* <OrbitControls minPolarAngle={Math.PI /2} maxPolarAngle={Math.PI} target={[0,0,0]}/> */}
         <ambientLight />
         <pointLight position={[0, 3, 0]} />
       </Canvas>
