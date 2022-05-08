@@ -97,8 +97,8 @@ function CameraGridController({ turn, prevLookAt, position, prevTurn }) {
   // return <OrbitControls minPolarAngle={Math.PI /5} maxPolarAngle={Math.PI/2} target={[0,0,0]}  position={vectorPosition}/>
   return (
     <perspectiveCamera
-      rotation={[0, 0, 0]}
-      // rotation={[Math.PI / 4, -0.9, 0]}
+      // rotation={[0, 0, 0]}
+      rotation={[Math.PI / 4, -0.9, 0]}
       ref={ref}
       aspect={aspect}
       fov={75}
