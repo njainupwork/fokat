@@ -222,8 +222,10 @@ const NFTCard: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!account) {
+      setLoading(false);
       return;
     }
+    setLoading(true);
     //@todo fix cors issue
     getUserTokens().then((tokens) => {
       console.log(
