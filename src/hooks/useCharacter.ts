@@ -7,8 +7,8 @@ export const useCharacter = () => {
   const { account } = useWeb3React();
   
   const nftContract = useNftContract();
-  const oldBoard = useBoardContract();
-  const board = useNewBoardContract();
+  const board = useBoardContract();
+  // const board = useNewBoardContract();
 
   const getUserNfts = useCallback(async () => {
     try {
@@ -50,7 +50,7 @@ export const useCharacter = () => {
   const endGame = useCallback(
     async (nftId) => {
       try {
-        const info = await exitGame(oldBoard, nftId, account);
+        const info = await exitGame(board, nftId, account);
         console.log(
           "🚀 ~ file: useCharacter.ts ~ line 26 ~ enterGame ~ info",
           info
