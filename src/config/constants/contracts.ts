@@ -5,7 +5,7 @@ export default {
   },
   new_board: {
     97: "0x094714b939981d92620e6cff1f7d4147c754bcd4",
-    56: "0x78334dfe4bfd4569d9e8eb058400cdbdb3fbf662",
+    56: "0xe0CEC3E02D979B0a5a2E15300859Da6E1aF3a83D",
   },
   nft: {
     97: "0xf762ad2378e049cf7b5c42a212210a69dac4f624",

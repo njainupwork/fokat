@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useWeb3React } from "@web3-react/core";
-import { useBoardContract } from "./useContract";
+import { useBoardContract,useNewBoardContract } from "./useContract";
 import { checkGridInfos, rollDice, userInfo, userInfos } from "utils/callHelpers";
 
 export const useDiceRoll = () => {
   const { account } = useWeb3React();
-  const boardContract = useBoardContract();
+  const boardContract = useNewBoardContract();
 
   const handleRoll = useCallback(async () => {
     try {
@@ -20,7 +20,7 @@ export const useDiceRoll = () => {
   const handleUserInfo = useCallback(async () => {
     try {
       const tx = await userInfo(boardContract, account);
-      console.log("txHash_user", tx);
+      console.log("txHash_user" , tx);
       return tx;
     } catch (e) {
       console.log('txHash_user_e', e, account)
