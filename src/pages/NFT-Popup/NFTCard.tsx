@@ -253,8 +253,14 @@ const NFTCard: React.FC = () => {
         } catch (e) {
           console.log(
             "🚀 ~ file: NFTCard.tsx ~ line 253 ~ tokens=tokens.map ~ e",
-            e
+            e,
+            "Token: ",
+            token
           );
+          return {
+            image: null,
+            id: token,
+          };
         }
       });
 
@@ -321,23 +327,26 @@ const NFTCard: React.FC = () => {
               return (
                 <Row key={i}>
                   {chunk.map((token, j) => {
+                    if (!token || !token.image) {
+                      return <></>;
+                    }
                     const img = token.image;
                     return (
                       <NFT onClick={() => selectCharacter(token["id"])} key={j}>
-                          <ContentWrapper>
-                            <Content>
-                              <Frame>
-                                <CharacterImg src={img} />
-                              </Frame>
-                            </Content>
-                          </ContentWrapper>
-                          {/* <Tag>Token {token}</Tag> */}
+                        <ContentWrapper>
+                          <Content>
+                            <Frame>
+                              <CharacterImg src={img} />
+                            </Frame>
+                          </Content>
+                        </ContentWrapper>
+                        {/* <Tag>Token {token}</Tag> */}
 
-                          <Box>
-                            <Text1>NFT {token["id"]}</Text1>
-                            {/* <Text2>level</Text2> */}
-                          </Box>
-                        </NFT>
+                        <Box>
+                          <Text1>NFT {token["id"]}</Text1>
+                          {/* <Text2>level</Text2> */}
+                        </Box>
+                      </NFT>
                     );
                   })}
                 </Row>

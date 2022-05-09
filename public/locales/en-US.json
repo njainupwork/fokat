@@ -51,5 +51,13 @@
   "100": "100",
   "200": "200",
   "300": "300",
-  "Approved": "Transfer Approved"
+  "Approved": "Transfer Approved",
+
+  "Confirm Exit": "Confirm Exit",
+  "Are you sure to do delete.": "Are you sure to do delete.",
+  "Yes": "Yes",
+  "Exiting Game": "Exiting GAme",
+  "No GAme": "No",
+  "Game exited": "Game exited",
+  "Failed to exit game": "Failed to exit game"
 }

@@ -23,6 +23,8 @@ import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
 import { useCharacter } from "hooks/useCharacter";
 import CountdownTimer from "./CountDown";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const MyEquipmentButton = styled.button`
   width: 211px;
@@ -165,7 +167,7 @@ const TopButtons: React.FC = () => {
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
   const { t } = useTranslation();
-  const { isEntered, getUserTokens } = useCharacter();
+  const { isEntered, getUserTokens, exitGame } = useCharacter();
 
   let time = "";
   let rollingAt = "";
@@ -202,7 +204,7 @@ const TopButtons: React.FC = () => {
         });
         return;
       }
-      
+
       dispatch({
         type: "userInfos",
         diceAvailable: tx[1],
@@ -240,8 +242,7 @@ const TopButtons: React.FC = () => {
   }, [playing]);
   const prevAccount = usePrevious(account);
   useEffect(() => {
-
-    if(account){
+    if (account) {
       getAndDispatchPosition();
     }
   }, [account]);
@@ -310,7 +311,39 @@ const TopButtons: React.FC = () => {
       getAndDispatchPosition(true);
     });
   };
-  console.log('characterSelected_characterSelected', characterSelected)
+
+  const handleExitGame = () => {
+    confirmAlert({
+      title: t("Confirm Exit"),
+      message: t("Are you sure to do delete."),
+      buttons: [
+        {
+          label: t("Yes"),
+          onClick: () => {
+            toastSuccess("", t("Exiting Game"));
+            console.log('characterSelected', characterSelected)
+            exitGame(characterSelected).then((tx) => {
+              if (!tx) {
+                toastError("Error", t("Failed to exit game"));
+                return;
+              }
+              toastSuccess("", t("Game exited"))
+              dispatch({
+                type: "resetGame",
+              });
+              return;
+            });
+          },
+        },
+        {
+          label: t("No"),
+          onClick: () => {},
+        },
+      ],
+    });
+    
+  };
+  console.log("characterSelected_characterSelected", characterSelected);
   if (characterSelected == -1 || !characterSelected) {
     return <NFTCard />;
   }
@@ -367,6 +400,9 @@ const TopButtons: React.FC = () => {
             >
               {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
               {!time && (rolling ? t("rolling") : t("Roll"))}
+            </DiceRollButton>
+            <DiceRollButton onClick={handleExitGame}>
+              {t("Exit Game")}
             </DiceRollButton>
           </>
         ) : (
