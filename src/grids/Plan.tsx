@@ -33,7 +33,7 @@ const OsakaComponents = {
   Beijing5: Beijing5,
 };
 export default function Plane(props) {
- let geomRef = useRef<any>();
+  let geomRef = useRef<any>();
   const dispatch = props.dispatch;
   const background = useLoader(
     TextureLoader,
@@ -51,6 +51,13 @@ export default function Plane(props) {
     dispatch({
       type: "mouseOverOut",
       hover: -1,
+    });
+  };
+
+  const handleClick = (event, k) => {
+    dispatch({
+      type: "mouseOver",
+      hover: parseInt(k),
     });
   };
   var deg = 0;
@@ -75,17 +82,23 @@ export default function Plane(props) {
         In this case the shape is a flat plane
       */}
       {/* <Stars /> */}
-      
+
       {plots.map((plot, k) => {
-        if (plot.hasOwnProperty('component')) {
+        if (plot.hasOwnProperty("component")) {
           const Osaka = OsakaComponents[plot["component"]];
           return (
             <Osaka
               position={[plot["x"], plot["y"], 0]}
               key={k}
               rotation={[Math.PI / -2, 0, 0]}
-              onPointerOver={(event) => {
+              onMouseEnter={(event) => {
                 mouseOver(event, k);
+              }}
+              onMouseLeave={(event) => {
+                mouseOut(event, k);
+              }}
+              onClick={(event) => {
+                handleClick(event, k);
               }}
             />
           );
@@ -113,7 +126,12 @@ export default function Plane(props) {
       */}
       {/* <circleBufferGeometry args={[51, 5]} attach="geometry" /> */}
       <circleBufferGeometry args={[51, 5]} attach="geometry" />
-      <meshBasicMaterial side={DoubleSide} opacity={0.5} wireframe={false} map={background}/>
+      <meshBasicMaterial
+        side={DoubleSide}
+        opacity={0.5}
+        wireframe={false}
+        map={background}
+      />
     </mesh>
   );
 }

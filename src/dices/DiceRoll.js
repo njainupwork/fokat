@@ -22,7 +22,7 @@ export default function DiceRoll1({ ...props }) {
   }, [props.rand])
 
   const { nodes, materials, animations } = useGLTF(`assets/dices/DiceRoll${props.number}.gltf`)
-  console.log('materials', materials)
+  
   const { actions } = useAnimations(animations, group)
   const scale = .2;
   return (

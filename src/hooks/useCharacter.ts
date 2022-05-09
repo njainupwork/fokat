@@ -5,6 +5,7 @@ import { approveNft, enterGame, getUserOwnedTokens, isEntered, exitGame } from "
 
 export const useCharacter = () => {
   const { account } = useWeb3React();
+  
   const nftContract = useNftContract();
   const board = useBoardContract();
 

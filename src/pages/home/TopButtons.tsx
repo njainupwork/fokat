@@ -71,7 +71,7 @@ const ButtonBox = styled.div`
   margin-right: 2rem;
   @media (max-width: 425px) {
     margin: 28px;
-    margin: 60px 0px;
+    margin: 60px 10px;
   }
 
   position: absolute;
@@ -89,6 +89,7 @@ const RollButton = styled.div`
   margin-bottom: 2rem;
   @media (max-width: 425px) {
     margin: 28px;
+    margin-top: 60px;
   }
 
   position: absolute;
@@ -104,10 +105,7 @@ const HoverDiv = styled.div`
   justify-content: center;
   margin: 143px 0px;
   margin-right: 2rem;
-  @media (max-width: 425px) {
-    margin: 28px;
-  }
-
+  
   position: absolute;
   z-index: 999999999999999999999999999;
   left: 10px;
@@ -118,6 +116,12 @@ const HoverDiv = styled.div`
   text-align: center;
   color: #fff;
   border-radius: 5px;
+  @media (max-width: 425px) {
+    margin: 0px;
+    top: 100px;
+    padding: 5px;
+  }
+
 `;
 const SoundButton = styled.button`
   width: 211px;
@@ -193,7 +197,10 @@ const TopButtons: React.FC = () => {
   const getAndDispatchPosition = async (showToast = false) => {
     getPosition().then(async (tx) => {
       const entered = await isEntered();
-      console.log("🚀 ~ file: TopButtons.tsx ~ line 195 ~ getPosition ~ entered", entered)
+      console.log(
+        "🚀 ~ file: TopButtons.tsx ~ line 195 ~ getPosition ~ entered",
+        entered
+      );
       if (!tx || !entered) {
         dispatch({
           type: "userInfos",
@@ -315,25 +322,26 @@ const TopButtons: React.FC = () => {
   };
 
   const handleExitGame = () => {
-    
     confirmAlert({
       title: t("Confirm Exit"),
-      message: t("Are you sure to do delete."),
+      message: t("Are you sure to do exit game?"),
       buttons: [
         {
           label: t("Yes"),
           onClick: () => {
             toastSuccess("", t("Exiting Game"));
-            console.log('characterSelected', characterSelected)
+            console.log("characterSelected", characterSelected);
             exitGame(characterSelected).then((tx) => {
               if (!tx) {
                 toastError("Error", t("Failed to exit game"));
                 return;
               }
-              toastSuccess("", t("Game exited"))
-              dispatch({
-                type: "resetGame",
-              });
+              toastSuccess("", t("Game exited"));
+              setTimeout(() => {
+                dispatch({
+                  type: "resetGame",
+                });
+              }, 2000);
               return;
             });
           },
@@ -344,7 +352,6 @@ const TopButtons: React.FC = () => {
         },
       ],
     });
-    
   };
   console.log("characterSelected_characterSelected", characterSelected);
   if (characterSelected == -1 || !characterSelected) {
@@ -364,22 +371,22 @@ const TopButtons: React.FC = () => {
       )}
       <ButtonBox>
         {playing ? (
-            <SoundButton onClick={toggle}>
-              <img
-                src={Volume1}
-                alt="Volume1"
-                style={{ width: "30px", height: "auto" }}
-              />
-            </SoundButton>
-          ) : (
-            <IconButton className="icon-btn" onClick={toggle}>
-              <img
-                src={ValumeUp}
-                alt={t("Valume Up")}
-                style={{ width: "30px", height: "auto" }}
-              />
-            </IconButton>
-          )}
+          <SoundButton onClick={toggle}>
+            <img
+              src={Volume1}
+              alt="Volume1"
+              style={{ width: "30px", height: "auto" }}
+            />
+          </SoundButton>
+        ) : (
+          <IconButton className="icon-btn" onClick={toggle}>
+            <img
+              src={ValumeUp}
+              alt={t("Valume Up")}
+              style={{ width: "30px", height: "auto" }}
+            />
+          </IconButton>
+        )}
         {/* <MyEquipmentButton>
           <img src={myequipment} alt="myequipment" style={{ width: "32px" }} />
         </MyEquipmentButton>
