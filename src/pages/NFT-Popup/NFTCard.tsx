@@ -238,17 +238,16 @@ const NFTCard: React.FC = () => {
         return;
       }
       tokens = tokens.map(async (token) => {
-      
         try {
           const resp = await axios.get(
             `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
           );
           const json = resp.data;
           const data = json.data[0];
-          const tokenData = data.token;
+          console.log("🚀 ~ file: NFTCard.tsx ~ line 247 ~ tokens=tokens.map ~ data", data)
 
           return {
-            image: tokenData.ipfsUrl,
+            image: data.imgUrl,
             id: token,
           };
         } catch (e) {
