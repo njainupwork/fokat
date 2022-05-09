@@ -23,6 +23,8 @@ import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
 import { useCharacter } from "hooks/useCharacter";
 import CountdownTimer from "./CountDown";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const MyEquipmentButton = styled.button`
   width: 211px;
@@ -69,6 +71,7 @@ const ButtonBox = styled.div`
   margin-right: 2rem;
   @media (max-width: 425px) {
     margin: 28px;
+    margin: 60px 0px;
   }
 
   position: absolute;
@@ -165,7 +168,7 @@ const TopButtons: React.FC = () => {
   const { onDiceRoll, getPosition, getReward } = useDiceRoll();
   const { dice, hover, characterSelected } = useSelector(selector);
   const { t } = useTranslation();
-  const { isEntered, getUserTokens } = useCharacter();
+  const { isEntered, getUserTokens, exitGame } = useCharacter();
 
   let time = "";
   let rollingAt = "";
@@ -190,6 +193,7 @@ const TopButtons: React.FC = () => {
   const getAndDispatchPosition = async (showToast = false) => {
     getPosition().then(async (tx) => {
       const entered = await isEntered();
+      console.log("🚀 ~ file: TopButtons.tsx ~ line 195 ~ getPosition ~ entered", entered)
       if (!tx || !entered) {
         dispatch({
           type: "userInfos",
@@ -202,13 +206,13 @@ const TopButtons: React.FC = () => {
         });
         return;
       }
-      
+
       dispatch({
         type: "userInfos",
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3].length && entered ? tx[3][0] : -1,
+        characterSelected: tx[3] && entered ? tx[3] : -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -240,8 +244,7 @@ const TopButtons: React.FC = () => {
   }, [playing]);
   const prevAccount = usePrevious(account);
   useEffect(() => {
-
-    if(account){
+    if (account) {
       getAndDispatchPosition();
     }
   }, [account]);
@@ -310,7 +313,40 @@ const TopButtons: React.FC = () => {
       getAndDispatchPosition(true);
     });
   };
-  console.log('characterSelected_characterSelected', characterSelected)
+
+  const handleExitGame = () => {
+    
+    confirmAlert({
+      title: t("Confirm Exit"),
+      message: t("Are you sure to do delete."),
+      buttons: [
+        {
+          label: t("Yes"),
+          onClick: () => {
+            toastSuccess("", t("Exiting Game"));
+            console.log('characterSelected', characterSelected)
+            exitGame(characterSelected).then((tx) => {
+              if (!tx) {
+                toastError("Error", t("Failed to exit game"));
+                return;
+              }
+              toastSuccess("", t("Game exited"))
+              dispatch({
+                type: "resetGame",
+              });
+              return;
+            });
+          },
+        },
+        {
+          label: t("No"),
+          onClick: () => {},
+        },
+      ],
+    });
+    
+  };
+  console.log("characterSelected_characterSelected", characterSelected);
   if (characterSelected == -1 || !characterSelected) {
     return <NFTCard />;
   }
@@ -327,9 +363,8 @@ const TopButtons: React.FC = () => {
         ""
       )}
       <ButtonBox>
-        <Button onClick={toggle} style={{ background: "transparent" }}>
-          {playing ? (
-            <SoundButton>
+        {playing ? (
+            <SoundButton onClick={toggle}>
               <img
                 src={Volume1}
                 alt="Volume1"
@@ -337,7 +372,7 @@ const TopButtons: React.FC = () => {
               />
             </SoundButton>
           ) : (
-            <IconButton className="icon-btn">
+            <IconButton className="icon-btn" onClick={toggle}>
               <img
                 src={ValumeUp}
                 alt={t("Valume Up")}
@@ -345,7 +380,6 @@ const TopButtons: React.FC = () => {
               />
             </IconButton>
           )}
-        </Button>
         {/* <MyEquipmentButton>
           <img src={myequipment} alt="myequipment" style={{ width: "32px" }} />
         </MyEquipmentButton>
@@ -367,6 +401,9 @@ const TopButtons: React.FC = () => {
             >
               {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
               {!time && (rolling ? t("rolling") : t("Roll"))}
+            </DiceRollButton>
+            <DiceRollButton onClick={handleExitGame}>
+              {t("Exit Game")}
             </DiceRollButton>
           </>
         ) : (

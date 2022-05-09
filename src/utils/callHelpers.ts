@@ -65,10 +65,13 @@ export const isEntered = async (board, account) => {
   const entered = await board.methods.isEntered(account).call();
   return entered;
 };
-export const ExitGame = async (board, nftId) => {
-  return await board.methods.ExitGame(nftId).on("transactionHash", (tx) => {
-    return tx.transactionHash;
-  });
+export const exitGame = async (board, nftId, account) => {
+  return await board.methods
+    .ExitGame(nftId)
+    .send({ from: account })
+    .on("transactionHash", (tx) => {
+      return tx.transactionHash;
+    });
 };
 
 export const enterGame = async (board, nftId, account) => {

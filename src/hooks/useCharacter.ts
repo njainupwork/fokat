@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { useNftContract, useBoardContract } from "./useContract";
-import { approveNft, enterGame, getUserOwnedTokens, isEntered } from "utils/callHelpers";
+import { approveNft, enterGame, getUserOwnedTokens, isEntered, exitGame } from "utils/callHelpers";
 
 export const useCharacter = () => {
   const { account } = useWeb3React();
@@ -31,6 +31,24 @@ export const useCharacter = () => {
     async (nftId) => {
       try {
         const info = await enterGame(board, nftId, account);
+        console.log(
+          "🚀 ~ file: useCharacter.ts ~ line 26 ~ enterGame ~ info",
+          info
+        );
+
+        return info;
+      } catch (e) {
+        console.log("🚀 ~ file: useCharacter.ts ~ line 30 ~ enterGame ~ e", e);
+
+        return false;
+      }
+    },
+    [account, board]
+  );
+  const endGame = useCallback(
+    async (nftId) => {
+      try {
+        const info = await exitGame(board, nftId, account);
         console.log(
           "🚀 ~ file: useCharacter.ts ~ line 26 ~ enterGame ~ info",
           info
@@ -84,5 +102,6 @@ export const useCharacter = () => {
     enterGame: joinGame,
     approveNFT: approve,
     isEntered: entered,
+    exitGame:endGame
   };
 };
