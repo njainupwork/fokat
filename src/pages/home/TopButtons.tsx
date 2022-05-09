@@ -210,7 +210,7 @@ const TopButtons: React.FC = () => {
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3].length && entered ? tx[3][0] : -1,
+        characterSelected: tx[3].length && entered ? tx[3] : -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -313,6 +313,7 @@ const TopButtons: React.FC = () => {
   };
 
   const handleExitGame = () => {
+    
     confirmAlert({
       title: t("Confirm Exit"),
       message: t("Are you sure to do delete."),
