@@ -14,6 +14,10 @@ export const getNftAddress = () => {
   return getAddress(addresses.nft)
 }
 
+export const getNewBoardAddress = () => {
+  return getAddress(addresses.new_board)
+}
+
 export const getMulticallAddress = () => {
   return getAddress(addresses.multiCall)
 }

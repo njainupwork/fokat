@@ -199,7 +199,7 @@ const TopButtons: React.FC = () => {
       const entered = await isEntered();
       console.log(
         "🚀 ~ file: TopButtons.tsx ~ line 195 ~ getPosition ~ entered",
-        entered
+        entered, tx
       );
       if (!tx || !entered) {
         dispatch({

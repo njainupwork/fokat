@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import useWeb3 from "hooks/useWeb3"
-import { getBoardContract, getNftContract } from "utils/contractHelpers"
+import { getBoardContract, getNftContract,getNewBoardContract } from "utils/contractHelpers"
 import { Contract } from "@ethersproject/contracts"
 import ERC20_ABI from "config/abi/erc20.json"
 import { getMulticallAddress } from "utils/addressHelpers"
@@ -55,6 +55,11 @@ export function getContract(
 export const useBoardContract = () => {
   const web3 = useWeb3()
   return useMemo(() => getBoardContract(web3), [web3])
+}
+
+export const useNewBoardContract = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getNewBoardContract(web3), [web3])
 }
 
 export const useNftContract = () => {

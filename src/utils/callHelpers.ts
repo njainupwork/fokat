@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { ethers } from "ethers";
-import { getBoardAddress } from "utils/addressHelpers";
+import { getNewBoardAddress } from "utils/addressHelpers";
 
 export const approve = async (lpContract, masterChefContract, account) => {
   return lpContract.methods
@@ -53,7 +53,7 @@ export const getUserOwnedTokens = async (nft, account) => {
 
 export const approveNft = async (nft, account, nftId) => {
   const approved = await nft.methods
-    .approve(getBoardAddress(), nftId)
+    .approve(getNewBoardAddress(), nftId)
     .send({ from: account })
     .on("transactionHash", (tx) => {
       return tx.transactionHash;
