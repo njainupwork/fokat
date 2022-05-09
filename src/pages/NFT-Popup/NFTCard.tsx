@@ -238,6 +238,7 @@ const NFTCard: React.FC = () => {
         return;
       }
       tokens = tokens.map(async (token) => {
+      
         try {
           const resp = await axios.get(
             `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`

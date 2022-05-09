@@ -71,6 +71,7 @@ const ButtonBox = styled.div`
   margin-right: 2rem;
   @media (max-width: 425px) {
     margin: 28px;
+    margin: 60px 0px;
   }
 
   position: absolute;
@@ -192,6 +193,7 @@ const TopButtons: React.FC = () => {
   const getAndDispatchPosition = async (showToast = false) => {
     getPosition().then(async (tx) => {
       const entered = await isEntered();
+      console.log("🚀 ~ file: TopButtons.tsx ~ line 195 ~ getPosition ~ entered", entered)
       if (!tx || !entered) {
         dispatch({
           type: "userInfos",
@@ -210,7 +212,7 @@ const TopButtons: React.FC = () => {
         diceAvailable: tx[1],
         nextDiceRoll: tx[2],
         gridPosition: tx[0],
-        characterSelected: tx[3].length && entered ? tx[3] : -1,
+        characterSelected: tx[3] && entered ? tx[3] : -1,
         roll1:
           tx[4] && tx[4].length == 2 && parseInt(tx[4][0]) != 0
             ? parseInt(tx[4][0])
@@ -361,9 +363,8 @@ const TopButtons: React.FC = () => {
         ""
       )}
       <ButtonBox>
-        <Button onClick={toggle} style={{ background: "transparent" }}>
-          {playing ? (
-            <SoundButton>
+        {playing ? (
+            <SoundButton onClick={toggle}>
               <img
                 src={Volume1}
                 alt="Volume1"
@@ -371,7 +372,7 @@ const TopButtons: React.FC = () => {
               />
             </SoundButton>
           ) : (
-            <IconButton className="icon-btn">
+            <IconButton className="icon-btn" onClick={toggle}>
               <img
                 src={ValumeUp}
                 alt={t("Valume Up")}
@@ -379,7 +380,6 @@ const TopButtons: React.FC = () => {
               />
             </IconButton>
           )}
-        </Button>
         {/* <MyEquipmentButton>
           <img src={myequipment} alt="myequipment" style={{ width: "32px" }} />
         </MyEquipmentButton>
