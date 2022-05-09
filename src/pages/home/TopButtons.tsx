@@ -67,7 +67,7 @@ const ButtonBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin: 40px 0px;
+  margin: 143px 0px;
   margin-right: 2rem;
   @media (max-width: 425px) {
     margin: 28px;
@@ -102,7 +102,7 @@ const HoverDiv = styled.div`
   display: block;
   flex-direction: row;
   justify-content: center;
-  margin: 40px 0px;
+  margin: 143px 0px;
   margin-right: 2rem;
   @media (max-width: 425px) {
     margin: 28px;
