@@ -5,7 +5,7 @@ import { checkGridInfos, rollDice, userInfo, userInfos } from "utils/callHelpers
 
 export const useDiceRoll = () => {
   const { account } = useWeb3React();
-  const boardContract = useNewBoardContract();
+  const boardContract = useBoardContract();
 
   const handleRoll = useCallback(async () => {
     try {
