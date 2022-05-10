@@ -302,7 +302,7 @@ const NFTCard: React.FC = () => {
     })
   }
 
-  return <ExitGamePopup2 /> // Remove this after migrating new monopolon v2 board contract
+  // return <ExitGamePopup2 /> // Remove this after migrating new monopolon v2 board contract
   if (loading == true) {
     return (
       <Container>

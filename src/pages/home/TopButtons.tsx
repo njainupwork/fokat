@@ -358,9 +358,10 @@ const TopButtons: React.FC = () => {
   console.log("characterSelected_characterSelected", characterSelected)
   if (characterSelected == -1 || !characterSelected) {
     return <NFTCard />
-  } else if (exitPopUp) {
-    return <ExitGamePopup handleClick={setExitPopUp} />
   }
+  //  else if (exitPopUp) {
+  //   return <ExitGamePopup handleClick={setExitPopUp} />
+  // }
   return (
     <>
       {hover != -1 ? (
@@ -400,21 +401,19 @@ const TopButtons: React.FC = () => {
       </ButtonBox>
       <Grid />
       <RollButton>
-        {/* Uncomment below block after migrating monopolon v2 contract */}
-        {/* <DiceRollButton onClick={changeCam}>
+        <DiceRollButton onClick={changeCam}>
           {t("Change Camera")}
-        </DiceRollButton> */}
+        </DiceRollButton>
         {account ? (
           <>
-            {/* Uncomment below block after migrating monopolon v2 contract */}
-            {/* <DiceRollButton
+            <DiceRollButton
               onClick={handleRoll}
               title={time}
               disabled={time !== "" || rolling}
             >
               {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
               {!time && (rolling ? t("rolling") : t("Roll"))}
-            </DiceRollButton> */}
+            </DiceRollButton>
             <DiceRollButton onClick={handleExitGame}>
               {t("Exit Game")}
             </DiceRollButton>
