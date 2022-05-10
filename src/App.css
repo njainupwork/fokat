@@ -86,6 +86,7 @@
   overflow-x: hidden;
   min-width: 100vw;
   min-height: 100vh;
+  background: url("background.8f03f9ac.jpeg") 0% 0% / cover no-repeat fixed !important;
   background-color: #0d0415;
   display: grid;
 }
@@ -103,3 +104,4 @@
 .Nav-sections{
   max-height: 140px !important;
 }
+
