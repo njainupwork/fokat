@@ -102,9 +102,11 @@
   "View Transaction": "在 BSC 扫描处查看交易",
   "close": "关闭",
   "tokens": "代币",
-  
+
   "100": "100",
   "200": "200",
   "300": "300",
-  "Approved": "转让批准"
+  "Approved": "转让批准",
+  "You Cannot enter into the game right now. We are migrating our Monopolon V2 Board at 18:00 Hrs GMT+8": "你现在不能进入游戏，我们正在迁移我们的宇宙富豪 V2棋盘在 18 : 00 时格林威治时间+ 8",
+  "Please Exit game , We are migrating our Monopolon V2 Board at 18:00 Hrs GMT+8": "请退出游戏，我们正在迁移我们的宇宙富豪 V2棋盘在 18 : 00 时格林威治时间+ 8"
 }

@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Button } from "@kenjiwb/uikit"
+import { useTranslation } from "contexts/Localization"
 
 const Container = styled.div`
   background: inherit;
@@ -40,12 +41,14 @@ interface ExitGameProps {
 }
 
 const ExitGamePopup: React.FC<ExitGameProps> = ({ handleClick }) => {
+  const { t } = useTranslation()
   return (
     <>
       <Container>
         <TitlePurchase>
-          Please Exit game , We are migrating our Monopolon V2 Board at 18:00
-          Hrs GMT+8
+          {t(
+            "Please Exit game , We are migrating our Monopolon V2 Board at 18:00 Hrs GMT+8"
+          )}
         </TitlePurchase>
         <Button
           onClick={() => {
@@ -60,12 +63,14 @@ const ExitGamePopup: React.FC<ExitGameProps> = ({ handleClick }) => {
 }
 
 export const ExitGamePopup2: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <>
       <Container>
         <TitlePurchase>
-          You Cannot enter into the game right now. We are migrating our
-          Monopolon V2 Board at 18:00 Hrs GMT+8
+          {t(
+            "You Cannot enter into the game right now. We are migrating our Monopolon V2 Board at 18:00 Hrs GMT+8"
+          )}
         </TitlePurchase>
       </Container>
     </>
