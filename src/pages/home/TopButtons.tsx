@@ -25,7 +25,7 @@ import { useCharacter } from "hooks/useCharacter"
 import CountdownTimer from "./CountDown"
 import { confirmAlert } from "react-confirm-alert"
 import "react-confirm-alert/src/react-confirm-alert.css"
-import ExitGamePopup from "pages/ExitGame-Popup"
+import { ExitGamePopup3 } from "pages/ExitGame-Popup"
 
 const MyEquipmentButton = styled.button`
   width: 211px;
@@ -167,7 +167,9 @@ const TopButtons: React.FC = () => {
   const [received, setReceived] = useState("")
   const [txId, setTx] = useState(null)
   const [rolling, setRolling] = useState(false)
-  const [exitPopUp, setExitPopUp] = useState(true)
+  const [exitPopUp, setExitPopUp] = useState(
+    localStorage.getItem("exitgamePopup") === null
+  )
 
   const [cam, setCam] = useState("grid")
   const { onDiceRoll, getPosition, getReward } = useDiceRoll()
@@ -356,12 +358,13 @@ const TopButtons: React.FC = () => {
     })
   }
   console.log("characterSelected_characterSelected", characterSelected)
+  if (exitPopUp) {
+    return <ExitGamePopup3 handleClick={setExitPopUp} />
+  }
   if (characterSelected == -1 || !characterSelected) {
     return <NFTCard />
   }
-  //  else if (exitPopUp) {
-  //   return <ExitGamePopup handleClick={setExitPopUp} />
-  // }
+
   return (
     <>
       {hover != -1 ? (

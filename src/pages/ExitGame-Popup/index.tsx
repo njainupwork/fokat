@@ -76,4 +76,28 @@ export const ExitGamePopup2: React.FC = () => {
     </>
   )
 }
+
+export const ExitGamePopup3: React.FC<ExitGameProps> = ({ handleClick }) => {
+  const { t } = useTranslation()
+  return (
+    <>
+      <Container>
+        <TitlePurchase>
+          {t(
+            "Visit v1.monopolon.io, if you have not exited game from monopolon board v1 already"
+          )}
+          <a href="https://v1.monopolon.io">Click here</a>
+        </TitlePurchase>
+        <Button
+          onClick={() => {
+            handleClick(false)
+            localStorage.setItem("exitgamePopup", "false")
+          }}
+        >
+          Confirm
+        </Button>
+      </Container>
+    </>
+  )
+}
 export default ExitGamePopup
