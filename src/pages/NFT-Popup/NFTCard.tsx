@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { useWeb3React } from "@web3-react/core";
-import { useCharacter } from "hooks/useCharacter";
-import { useDispatch } from "react-redux";
-import useToast from "hooks/useToast";
-import { useTranslation } from "contexts/Localization";
-import axios from "axios";
+import React, { useEffect, useState } from "react"
+import styled, { keyframes } from "styled-components"
+import { useWeb3React } from "@web3-react/core"
+import { useCharacter } from "hooks/useCharacter"
+import { useDispatch } from "react-redux"
+import useToast from "hooks/useToast"
+import { useTranslation } from "contexts/Localization"
+import axios from "axios"
+import { ExitGamePopup2 } from "pages/ExitGame-Popup"
 const Container = styled.div`
   background: inherit;
   border: none;
@@ -15,7 +16,7 @@ const Container = styled.div`
   margin-top: 30px;
   width: 90%;
   margin: 10px auto;
-`;
+`
 
 const Title = styled.div`
   color: white;
@@ -33,7 +34,7 @@ const Title = styled.div`
     display: block;
     font-size: 18px;
   }
-`;
+`
 
 const TitlePurchase = styled.div`
   color: white;
@@ -56,7 +57,7 @@ const TitlePurchase = styled.div`
   margin: 0 auto;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-`;
+`
 
 const CardContainer = styled.div`
   display: block;
@@ -66,13 +67,13 @@ const CardContainer = styled.div`
   flex-direction: column;
   overflow: hidden;
   display: grid;
-`;
+`
 
 const shine = keyframes`
 100% {
   left: 125%;
 }
-`;
+`
 const NFT = styled.div`
   border: 1px solid #1b202b;
   margin: 1rem;
@@ -115,12 +116,12 @@ const NFT = styled.div`
   }
   cursor: pointer;
   // float: left;
-`;
+`
 const Content = styled.div`
   width: auto;
   height: 100%;
   color: white;
-`;
+`
 const Frame = styled.div`
   width: 300px;
   height: 100%;
@@ -128,7 +129,7 @@ const Frame = styled.div`
   text-align: center;
   // margin-top: 1.5rem;
   padding: 5px;
-`;
+`
 const Text1 = styled.div`
   color: white;
   font-family: Open Sans;
@@ -140,13 +141,13 @@ const Text1 = styled.div`
     font-size: 16px;
   }
   text-align: center;
-`;
+`
 const Text2 = styled.div`
   font-family: Open Sans;
   font-weight: 400;
   font-size: 16px;
   line-height: 21px;
-`;
+`
 const Box = styled.div`
   color:white;
   margin-top: 15px;
@@ -154,7 +155,7 @@ const Box = styled.div`
     margin-top: 35px;
 }
 }
-`;
+`
 const ContentWrapper = styled.div`
   background: #0d0415;
   height: 188px;
@@ -163,7 +164,7 @@ const ContentWrapper = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 10px;
-`;
+`
 const Row = styled.div`
   width: auto;
     align-items: center;
@@ -173,7 +174,7 @@ const Row = styled.div`
     display: block;
     }
 }
-`;
+`
 const Tag = styled.div`
   border: 3px solid #f6cb31;
   font-family: Open Sans;
@@ -199,110 +200,115 @@ const Tag = styled.div`
     width: 55px;
     height: 20px;
   }
-`;
+`
 
 const Break = styled.div`
   flex-basis: 100%;
   height: 0;
-`;
+`
 
 const CharacterImg = styled.img`
   max-height: 100%;
-`;
+`
 
 const NFTCard: React.FC = () => {
-  const { account } = useWeb3React();
-  const { getUserTokens, enterGame, approveNFT } = useCharacter();
-  const [loading, setLoading] = useState(true);
-  const [tokens, setTokens] = useState(null);
-  const { toastSuccess, toastError } = useToast();
-  const { t, currentLanguage } = useTranslation();
-  const { locale } = currentLanguage;
+  const { account } = useWeb3React()
+  const { getUserTokens, enterGame, approveNFT } = useCharacter()
+  const [loading, setLoading] = useState(true)
+  const [tokens, setTokens] = useState(null)
+  const { toastSuccess, toastError } = useToast()
+  const { t, currentLanguage } = useTranslation()
+  const { locale } = currentLanguage
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   useEffect(() => {
     if (!account) {
-      setLoading(false);
-      return;
+      setLoading(false)
+      return
     }
-    setLoading(true);
+    setLoading(true)
     //@todo fix cors issue
     getUserTokens().then((tokens) => {
       console.log(
         "🚀 ~ file: NFTCard.tsx ~ line 233 ~ getUserTokens ~ tokens",
         tokens
-      );
+      )
 
       if (!tokens) {
-        setLoading(false);
-        return;
+        setLoading(false)
+        return
       }
       tokens = tokens.map(async (token) => {
         try {
           const resp = await axios.get(
             `https://marketplace.monopolon.io/api/nfts/tokenId/${token}`
-          );
-          const json = resp.data;
-          const data = json.data[0];
-          console.log("🚀 ~ file: NFTCard.tsx ~ line 247 ~ tokens=tokens.map ~ data", data)
+          )
+          const json = resp.data
+          const data = json.data[0]
+          console.log(
+            "🚀 ~ file: NFTCard.tsx ~ line 247 ~ tokens=tokens.map ~ data",
+            data
+          )
 
           return {
             image: data.imgUrl,
             id: token,
-          };
+          }
         } catch (e) {
           console.log(
             "🚀 ~ file: NFTCard.tsx ~ line 253 ~ tokens=tokens.map ~ e",
             e,
             "Token: ",
             token
-          );
+          )
           return {
             image: null,
             id: token,
-          };
+          }
         }
-      });
+      })
 
       Promise.all(tokens).then((results) => {
-        tokens = results;
-        const chunkSize = 3;
-        const chunks = [];
+        tokens = results
+        const chunkSize = 3
+        const chunks = []
         for (let i = 0; i < tokens.length; i += chunkSize) {
-          chunks.push(tokens.slice(i, i + chunkSize));
+          chunks.push(tokens.slice(i, i + chunkSize))
         }
-        setTokens(chunks);
-        setLoading(false);
-      });
-    });
-  }, [account]);
+        setTokens(chunks)
+        setLoading(false)
+      })
+    })
+  }, [account])
 
   const selectCharacter = (token: number) => {
     approveNFT(token).then((approve) => {
       if (!approve) {
-        toastError("", t("Error Occurred"));
-        return;
+        toastError("", t("Error Occurred"))
+        return
       }
-      toastSuccess("", t("Approved"));
+      toastSuccess("", t("Approved"))
       enterGame(token).then((info) => {
         if (!info) {
-          toastError("", t("Error Occurred"));
-          return;
+          toastError("", t("Error Occurred"))
+          return
         }
-        toastSuccess("", t("Success"));
+        toastSuccess("", t("Success"))
         dispatch({
           type: "characterSelected",
           token: token,
-        });
-      });
-    });
-  };
+        })
+      })
+    })
+  }
+
+  return <ExitGamePopup2 /> // Remove this after migrating new monopolon v2 board contract
   if (loading == true) {
     return (
       <Container>
         <Title>{t("Fetching NFTs")}</Title>
       </Container>
-    );
+    )
   }
   if (!tokens || !tokens.length) {
     return (
@@ -314,7 +320,7 @@ const NFTCard: React.FC = () => {
           </a>
         </TitlePurchase>
       </Container>
-    );
+    )
   }
   return (
     <>
@@ -328,9 +334,9 @@ const NFTCard: React.FC = () => {
                 <Row key={i}>
                   {chunk.map((token, j) => {
                     if (!token || !token.image) {
-                      return <></>;
+                      return <></>
                     }
-                    const img = token.image;
+                    const img = token.image
                     return (
                       <NFT onClick={() => selectCharacter(token["id"])} key={j}>
                         <ContentWrapper>
@@ -347,14 +353,14 @@ const NFTCard: React.FC = () => {
                           {/* <Text2>level</Text2> */}
                         </Box>
                       </NFT>
-                    );
+                    )
                   })}
                 </Row>
-              );
+              )
             })}
         </CardContainer>
       </Container>
     </>
-  );
-};
-export default NFTCard;
+  )
+}
+export default NFTCard
