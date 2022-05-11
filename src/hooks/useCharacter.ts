@@ -50,7 +50,7 @@ export const useCharacter = () => {
   const endGame = useCallback(
     async (nftId) => {
       try {
-        const info = await exitGame(board, nftId, account);
+        const info = await exitGame(board, account);
         console.log(
           "🚀 ~ file: useCharacter.ts ~ line 26 ~ enterGame ~ info",
           info
