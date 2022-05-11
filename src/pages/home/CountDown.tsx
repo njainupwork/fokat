@@ -7,6 +7,11 @@ const CountDownDiv = styled.div`
   line-height: 46px;
   color: #fff;
   font-size: 24px;
+
+  @media (max-width: 425px) {
+    font-size: 14px;
+    display:contents;
+  }
 `;
 
 const Image = styled.img`
@@ -14,6 +19,10 @@ const Image = styled.img`
   margin-right: 5px;
   width: 32px;
   height: 32px;
+  @media (max-width: 425px) {
+    width: 16px;
+    height: 16px;
+  }
 `;
 const CountdownTimer = ({ targetDate }) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
