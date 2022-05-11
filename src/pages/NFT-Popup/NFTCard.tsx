@@ -6,15 +6,18 @@ import { useDispatch } from "react-redux";
 import useToast from "hooks/useToast";
 import { useTranslation } from "contexts/Localization";
 import axios from "axios";
+import bg from './../../assets/background.8f03f9ac.jpeg'
 const Container = styled.div`
-  background: inherit;
   border: none;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  // border-radius: 10px;
   margin-top: 30px;
-  width: 90%;
-  margin: 10px auto;
+  width: 100%;
+  // margin: 10px auto;
+  position: absolute;
+  top: 110px;
+  background: url("${bg}") 0% 0% / cover no-repeat fixed !important;
 `;
 
 const Title = styled.div`

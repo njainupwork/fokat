@@ -2,6 +2,7 @@
 import React from "react";
 import Topbar from "components/Topbar";
 import TopButtons from "./TopButtons";
+
 const Home: React.FC = () => {
   return (
     <>
