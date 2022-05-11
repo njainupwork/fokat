@@ -65,9 +65,9 @@ export const isEntered = async (board, account) => {
   const entered = await board.methods.isEntered(account).call();
   return entered;
 };
-export const exitGame = async (board, nftId, account) => {
+export const exitGame = async (board, account) => {
   return await board.methods
-    .ExitGame(nftId)
+    .ExitGame()
     .send({ from: account })
     .on("transactionHash", (tx) => {
       return tx.transactionHash;
