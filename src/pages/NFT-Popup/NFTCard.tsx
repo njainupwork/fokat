@@ -250,7 +250,7 @@ const NFTCard: React.FC = () => {
             "🚀 ~ file: NFTCard.tsx ~ line 247 ~ tokens=tokens.map ~ data",
             data
           );
-          if(!data || !data.imageUrl || data.type != 1){
+          if(!data || !data.imgUrl || parseInt(data.type) != 1){
             return null;
           }
           return {
