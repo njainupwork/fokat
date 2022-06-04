@@ -1,3 +1,5 @@
+// @ts-ignore
+// @ts-nocheck
 import React, { useEffect } from "react";
 import { Stats, OrbitControls } from "@react-three/drei";
 
@@ -111,13 +113,13 @@ function AnimationLaser() {
   const materials = useLoader(
     MTLLoader,
     "assets/textures/m249-gun_Metallic.png"
-  );
+  ) as any;
 
   let obj = useLoader(OBJLoader, "assets/animation_laser.obj", (loader) => {
     materials.preload();
     //@ts-ignore
     loader.setMaterials(materials);
-  });
+  }) as any;
 
   obj.traverse(function (child) {
     //@ts-ignore

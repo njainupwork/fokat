@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Osaka_p1 from "./Osaka/Osaka_p1";
 import Osaka_p2 from "./Osaka/Osaka_p2";
 import Osaka_p3 from "./Osaka/Osaka_p3";

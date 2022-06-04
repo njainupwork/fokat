@@ -82,3 +82,11 @@ export const enterGame = async (board, nftId, account) => {
       return tx.transactionHash;
     });
 };
+export const safeTransfer = async (nftContract, nftId, account, to) => {
+  return await nftContract.methods
+    .transferFrom(account, to, nftId)
+    .send({ from: account })
+    .on("transactionHash", (tx) => {
+      return tx.transactionHash;
+    });
+};

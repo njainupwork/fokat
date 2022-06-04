@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import GlobalStyle from "style/Global";
@@ -16,6 +17,7 @@ function App() {
       </Switch>
     </Router>
   );
+
 }
 
 export default App

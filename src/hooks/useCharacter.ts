@@ -1,11 +1,22 @@
 import { useCallback } from "react";
 import { useWeb3React } from "@web3-react/core";
-import { useNftContract, useBoardContract,useNewBoardContract } from "./useContract";
-import { approveNft, enterGame, getUserOwnedTokens, isEntered, exitGame } from "utils/callHelpers";
+import {
+  useNftContract,
+  useBoardContract,
+  useNewBoardContract,
+} from "./useContract";
+import {
+  approveNft,
+  enterGame,
+  getUserOwnedTokens,
+  isEntered,
+  exitGame,
+  safeTransfer,
+} from "utils/callHelpers";
 
 export const useCharacter = () => {
   const { account } = useWeb3React();
-  
+
   const nftContract = useNftContract();
   // const board = useBoardContract();
   const board = useNewBoardContract();
@@ -47,6 +58,20 @@ export const useCharacter = () => {
     },
     [account, board]
   );
+
+  const transfer = useCallback(
+    async (nftId, to) => {
+      console.log("🚀 ~ file: useCharacter.ts ~ line 63 ~ nftId", nftId);
+      try {
+        const transfer = await safeTransfer(nftContract, nftId, account, to);
+        console.log("🚀 ~ file: useCharacter.ts ~ line 67 ~ transfer", transfer)
+        return transfer;
+      } catch (e) {
+        console.log("🚀 ~ file: useCharacter.ts ~ line 66 ~ e", e);
+      }
+    },
+    [account, nftContract]
+  );
   const endGame = useCallback(
     async (nftId) => {
       try {
@@ -84,26 +109,24 @@ export const useCharacter = () => {
     },
     [account, nftContract]
   );
-  const entered = useCallback(
-    async () => {
-      try {
-        const info = await isEntered(board, account);
-        console.log("🚀 ~ file: useCharacter.ts ~ line 71 ~ isEntered", info)
-        return info;
-      } catch (e) {
-        console.log("🚀 ~ file: useCharacter.ts ~ line 44 ~ approveNFT ~ e", e);
+  const entered = useCallback(async () => {
+    try {
+      const info = await isEntered(board, account);
+      console.log("🚀 ~ file: useCharacter.ts ~ line 71 ~ isEntered", info);
+      return info;
+    } catch (e) {
+      console.log("🚀 ~ file: useCharacter.ts ~ line 44 ~ approveNFT ~ e", e);
 
-        return false;
-      }
-    },
-    [account, board]
-  );
+      return false;
+    }
+  }, [account, board]);
 
   return {
     getUserTokens: getUserNfts,
     enterGame: joinGame,
     approveNFT: approve,
     isEntered: entered,
-    exitGame:endGame
+    exitGame: endGame,
+    transferToCompany: transfer
   };
 };
