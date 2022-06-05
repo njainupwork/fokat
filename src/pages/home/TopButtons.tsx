@@ -391,7 +391,7 @@ const TopButtons: React.FC = () => {
           height: "100%",
           width: "100%",
           border: "2px solid black",
-          background: "grey",
+          background: "black",
         }}
       />
       {received != "" && (
