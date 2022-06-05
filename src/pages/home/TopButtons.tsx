@@ -29,10 +29,10 @@ import { ExitGamePopup3 } from "pages/ExitGame-Popup"
 import Unity, { UnityContext } from "react-unity-webgl"
 
 const unityContext = new UnityContext({
-  loaderUrl: "build/WebGL.loader.js",
-  dataUrl: "build/WebGL.data",
-  frameworkUrl: "build/WebGL.framework.js",
-  codeUrl: "build/WebGL.wasm",
+  loaderUrl: "unitybuild/WebGL.loader.js",
+  dataUrl: "unitybuild/WebGL.data",
+  frameworkUrl: "unitybuild/WebGL.framework.js",
+  codeUrl: "unitybuild/WebGL.wasm",
 })
 const MyEquipmentButton = styled.button`
   width: 211px;
