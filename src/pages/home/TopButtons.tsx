@@ -26,7 +26,14 @@ import CountdownTimer from "./CountDown"
 import { confirmAlert } from "react-confirm-alert"
 import "react-confirm-alert/src/react-confirm-alert.css"
 import { ExitGamePopup3 } from "pages/ExitGame-Popup"
+import Unity, { UnityContext } from "react-unity-webgl"
 
+const unityContext = new UnityContext({
+  loaderUrl: "build/WebGL.loader.js",
+  dataUrl: "build/WebGL.data",
+  frameworkUrl: "build/WebGL.framework.js",
+  codeUrl: "build/WebGL.wasm",
+})
 const MyEquipmentButton = styled.button`
   width: 211px;
   height: 46px;
@@ -377,54 +384,16 @@ const TopButtons: React.FC = () => {
       ) : (
         ""
       )}
-      <ButtonBox>
-        {playing ? (
-          <SoundButton onClick={toggle}>
-            <img
-              src={Volume1}
-              alt="Volume1"
-              style={{ width: "30px", height: "auto" }}
-            />
-          </SoundButton>
-        ) : (
-          <IconButton className="icon-btn" onClick={toggle}>
-            <img
-              src={ValumeUp}
-              alt={t("Valume Up")}
-              style={{ width: "30px", height: "auto" }}
-            />
-          </IconButton>
-        )}
-        {/* <MyEquipmentButton>
-          <img src={myequipment} alt="myequipment" style={{ width: "32px" }} />
-        </MyEquipmentButton>
-        <MyInventryButton>
-          <img src={myinventry} alt="myinventry" style={{ width: "32px" }} />
-        </MyInventryButton> */}
-      </ButtonBox>
-      <Grid />
-      <RollButton>
-        <DiceRollButton onClick={changeCam}>
-          {t("Change Camera")}
-        </DiceRollButton>
-        {account ? (
-          <>
-            <DiceRollButton
-              onClick={handleRoll}
-              title={time}
-              disabled={time !== "" || rolling}
-            >
-              {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
-              {!time && (rolling ? t("rolling") : t("Roll"))}
-            </DiceRollButton>
-            <DiceRollButton onClick={handleExitGame}>
-              {t("Exit Game")}
-            </DiceRollButton>
-          </>
-        ) : (
-          <UnlockButton />
-        )}
-      </RollButton>
+      <Unity
+        unityContext={unityContext}
+        style={{
+          position: "absolute",
+          height: "100%",
+          width: "100%",
+          border: "2px solid black",
+          background: "grey",
+        }}
+      />
       {received != "" && (
         <PopupCard
           closePopup={closePopupCard}
