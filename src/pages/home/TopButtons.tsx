@@ -27,6 +27,32 @@ import { confirmAlert } from "react-confirm-alert"
 import "react-confirm-alert/src/react-confirm-alert.css"
 import { ExitGamePopup3 } from "pages/ExitGame-Popup"
 
+import "./app.css"
+import { Fragment } from "react"
+import Unity, { UnityContext } from "react-unity-webgl"
+
+interface Vector2 {
+  x: number
+  y: number
+}
+
+// This is the context that Unity will use to communicate with the React app.
+const unityContext = new UnityContext({
+  productName: "React Unity WebGL Tests",
+  companyName: "Jeffrey Lanters",
+  // The url's of the Unity WebGL runtime, these paths are public and should be
+  // accessible from the internet and relative to the index.html.
+  loaderUrl: "unitybuild/2020.1/WebGL.loader.js",
+  dataUrl: "unitybuild/2020.1/WebGL.data",
+  frameworkUrl: "unitybuild/2020.1/WebGL.framework.js",
+  codeUrl: "unitybuild/2020.1/WebGL.wasm",
+  streamingAssetsUrl: "unitybuild/2020.1/streamingassets",
+  // Additional configuration options.
+  webglContextAttributes: {
+    preserveDrawingBuffer: true,
+  },
+})
+
 const MyEquipmentButton = styled.button`
   width: 211px;
   height: 46px;
@@ -170,6 +196,68 @@ const TopButtons: React.FC = () => {
   const [exitPopUp, setExitPopUp] = useState(
     localStorage.getItem("exitgamePopup") === null
   )
+
+  // Unity
+
+  const [isUnityMounted, setIsUnityMounted] = useState<boolean>(true)
+  const [rotationSpeed, setRotationSpeed] = useState<number>(30)
+  const [cubeRotation, setCubeRotation] = useState<number>(0)
+  const [clickPosition, setClickPosition] = useState<Vector2>({ x: 0, y: 0 })
+  const [saidMessage, setSaidMessage] = useState<string>("Nothing")
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [progression, setProgression] = useState<number>(0)
+
+  // When the component is mounted, we'll register some event listener.
+  useEffect(() => {
+    unityContext.on("canvas", handleOnUnityCanvas)
+    unityContext.on("progress", handleOnUnityProgress)
+    unityContext.on("loaded", handleOnUnityLoaded)
+    unityContext.on("RotationDidUpdate", handleOnUnityRotationDidUpdate)
+    unityContext.on("ClickedPosition", handleOnUnityClickedPosition)
+    unityContext.on("Say", handleOnUnitySayMessage)
+    // When the component is unmounted, we'll unregister the event listener.
+    return function () {
+      unityContext.removeAllEventListeners()
+    }
+  }, [])
+
+  // When the rotation speed has been updated, it will be sent to Unity.
+  useEffect(() => {
+    unityContext.send("MeshCrate", "SetRotationSpeed", rotationSpeed)
+  }, [rotationSpeed])
+
+  // Built-in event invoked when the Unity canvas is ready to be interacted with.
+  function handleOnUnityCanvas(canvas: HTMLCanvasElement) {
+    canvas.setAttribute("role", "unityCanvas")
+  }
+
+  // Built-in event invoked when the Unity app's progress has changed.
+  function handleOnUnityProgress(progression: number) {
+    setProgression(progression)
+  }
+
+  // Built-in event invoked when the Unity app is loaded.
+  function handleOnUnityLoaded() {
+    setIsLoaded(true)
+  }
+
+  // Custom event invoked when the Unity app sends a message indicating that the
+  // rotation has changed.
+  function handleOnUnityRotationDidUpdate(degrees: number) {
+    setCubeRotation(Math.round(degrees))
+  }
+
+  // Custom event invoked when the Unity app sends a message indicating that the
+  // mouse click position has changed.
+  function handleOnUnityClickedPosition(x: number, y: number) {
+    setClickPosition({ x, y })
+  }
+
+  // Custom event invoked when the Unity app sends a message including something
+  // it said.
+  function handleOnUnitySayMessage(message: string) {
+    setSaidMessage(message)
+  }
 
   const [cam, setCam] = useState("grid")
   const { onDiceRoll, getPosition, getReward } = useDiceRoll()
@@ -377,54 +465,26 @@ const TopButtons: React.FC = () => {
       ) : (
         ""
       )}
-      <ButtonBox>
-        {playing ? (
-          <SoundButton onClick={toggle}>
-            <img
-              src={Volume1}
-              alt="Volume1"
-              style={{ width: "30px", height: "auto" }}
-            />
-          </SoundButton>
-        ) : (
-          <IconButton className="icon-btn" onClick={toggle}>
-            <img
-              src={ValumeUp}
-              alt={t("Valume Up")}
-              style={{ width: "30px", height: "auto" }}
-            />
-          </IconButton>
-        )}
-        {/* <MyEquipmentButton>
-          <img src={myequipment} alt="myequipment" style={{ width: "32px" }} />
-        </MyEquipmentButton>
-        <MyInventryButton>
-          <img src={myinventry} alt="myinventry" style={{ width: "32px" }} />
-        </MyInventryButton> */}
-      </ButtonBox>
-      <Grid />
-      <RollButton>
-        <DiceRollButton onClick={changeCam}>
-          {t("Change Camera")}
-        </DiceRollButton>
-        {account ? (
-          <>
-            <DiceRollButton
-              onClick={handleRoll}
-              title={time}
-              disabled={time !== "" || rolling}
-            >
-              {time && <CountdownTimer targetDate={nextDiceRoll * 1000} />}
-              {!time && (rolling ? t("rolling") : t("Roll"))}
-            </DiceRollButton>
-            <DiceRollButton onClick={handleExitGame}>
-              {t("Exit Game")}
-            </DiceRollButton>
-          </>
-        ) : (
-          <UnlockButton />
-        )}
-      </RollButton>
+      {isUnityMounted === true && (
+        <Fragment>
+          <div className="unity-container">
+            {/* The loading screen will be displayed here. */}
+            {isLoaded === false && (
+              <div className="loading-overlay">
+                <div className="progress-bar">
+                  <div
+                    className="progress-bar-fill"
+                    style={{ width: progression * 100 + "%" }}
+                  />
+                </div>
+              </div>
+            )}
+            {/* The Unity app will be rendered here. */}
+            <Unity className="unity-canvas" unityContext={unityContext} />
+          </div>
+          {/* Displaying some output values */}
+        </Fragment>
+      )}
       {received != "" && (
         <PopupCard
           closePopup={closePopupCard}
